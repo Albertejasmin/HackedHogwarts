@@ -138,6 +138,31 @@ function prepareObjects(jsonData) {
 //   allStudents.forEach(displayStudent);
 // }
 
+// DISPLAY
+function displayList(students) {
+  // clear the list
+  document.querySelector("#list tbody").innerHTML = "";
+  // build a new list
+  students.forEach(displayStudent);
+  console.log("nu er vi i display listen");
+}
+
+function displayStudent(student) {
+  // create clone
+  const clone = document.querySelector("template#student").content.cloneNode(true);
+  // set clone data
+  clone.querySelector("[data-field=fullname]").textContent = student.firstName + " " + student.lastName;
+  // clone.querySelector("[data-field=firstname]").textContent = student.firstName;
+  // clone.querySelector("[data-field=middlename]").textContent = student.middleName;
+  // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
+  // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
+  clone.querySelector("[data-field=image] img").src = student.image.src;
+  clone.querySelector("[data-field=house]").textContent = student.house;
+
+  // append clone to list
+  document.querySelector("#list tbody").appendChild(clone);
+}
+
 // DROPDOWN
 function toggleDropDown(evt) {
   console.log("klik drop");
@@ -157,19 +182,24 @@ function setFilter(filter) {
   // sets the global variable
   settings.filterBy = filter;
   buildList();
+  console.log("buildlist kaldes");
 }
 
 function filterList(filteredList) {
-  if (settings.filterBy === "gryfindor") {
+  if (settings.filterBy === "gryffindor") {
+    console.log("This is gryffindor");
     // Create a filtered list of only cats
     filteredList = allStudents.filter(isGryf);
   } else if (settings.filterBy === "slytherin") {
+    console.log("This is slytherin");
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isSlyt);
   } else if (settings.filterBy === "hufflepuff") {
+    console.log("This is hufflepuff");
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isHuff);
   } else if (settings.filterBy === "ravenclaw") {
+    console.log("This is ravenclaw");
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isRave);
   }
@@ -178,18 +208,18 @@ function filterList(filteredList) {
 }
 
 function isGryf(student) {
-  return student.type === "gryffindor";
+  return student.house === "gryffindor";
 }
 console.log(`valgt hus ${student}`);
 
 function isSlyt(student) {
-  return student.type === "slytherin";
+  return student.house === "slytherin";
 }
 function isHuff(student) {
-  return student.type === "hufflepuff";
+  return student.house === "hufflepuff";
 }
 function isRave(student) {
-  return student.type === "ravenclaw";
+  return student.house === "ravenclaw";
 }
 
 function buildList() {
@@ -198,30 +228,7 @@ function buildList() {
   const sortedList = sortList(currentList);
   // kalder displayList med vores sortedList
   displayList(sortedList);
-}
-
-// DISPLAY
-function displayList(students) {
-  // clear the list
-  document.querySelector("#list tbody").innerHTML = "";
-  // build a new list
-  students.forEach(displayStudent);
-}
-
-function displayStudent(student) {
-  // create clone
-  const clone = document.querySelector("template#student").content.cloneNode(true);
-  // set clone data
-  clone.querySelector("[data-field=fullname]").textContent = student.firstName + " " + student.lastName;
-  // clone.querySelector("[data-field=firstname]").textContent = student.firstName;
-  // clone.querySelector("[data-field=middlename]").textContent = student.middleName;
-  // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
-  // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
-  clone.querySelector("[data-field=image] img").src = student.image.src;
-  clone.querySelector("[data-field=house]").textContent = student.house;
-
-  // append clone to list
-  document.querySelector("#list tbody").appendChild(clone);
+  console.log("displayList kaldes");
 }
 
 // SORTING
@@ -229,11 +236,11 @@ function selectSort(event) {
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
 
-  // find "old" sortBy element and remove .sortBy
-  const oldArrow = document.querySelector(`[data-sort=${settings.sortBy}]`);
-  oldArrow.classList.remove("sortby");
-  // indicate active sort
-  event.target.classList.add("sortby");
+  // // find "old" sortBy element and remove .sortBy
+  // const oldArrow = document.querySelector(`[data-sort=${settings.sortBy}]`);
+  // oldArrow.classList.remove("sortby");
+  // // indicate active sort
+  // event.target.classList.add("sortby");
 
   // Toggle the direction !
   console.log("SORT DIR", sortDir);
@@ -266,10 +273,10 @@ function sortList(sortedList) {
   sortedList = sortedList.sort(sortByProperty);
 
   // SORTING BY  NAME med CLOSURE !! nødvendigt for at vi kan bruge sortBy parametret
-  function sortByProperty(A_Z, Z_A) {
+  function sortByProperty(A, Z) {
     // console.log(`SortBy is ${sortBy}`);
     // siger hvis animalA kommer før < animalB
-    if (A_Z[settings.sortBy] < Z_A[settings.sortBy]) {
+    if (A[settings.sortBy] < Z[settings.sortBy]) {
       return -1 * direction;
     } else {
       return 1 * direction;
