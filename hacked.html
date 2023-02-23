@@ -16,20 +16,21 @@
     </header>
     <section class="allButtons">
       <section id="filter_buttons">
-        <button id="all_students">ALL STUDENTS</button>
-        <button class="gryffindor">GRYFFINDOR</button>
-        <button class="slytherin">SLYTHERIN</button>
-        <button class="hufflepuff">HUFFLEPUFF</button>
-        <button class="ravenclaw">RAVENCLAW</button>
+        <button id="all_students" data-action="filter" data-filter="*">ALL STUDENTS</button>
+        <button class="gryffindor" data-action="filter" data-filter="gryffindor">GRYFFINDOR</button>
+        <button class="slytherin" data-action="filter" data-filter="slytherin">SLYTHERIN</button>
+        <button class="hufflepuff" data-action="filter" data-filter="hufflepuff">HUFFLEPUFF</button>
+        <button class="ravenclaw" data-action="filter" data-filter="ravenclaw">RAVENCLAW</button>
       </section>
+
       <section id="sort_buttons">
-        <button>
+        <button data-action="sort" data-sort-direction="asc" data-sort="name">
           SORT BY NAME
           <span>↓</span>
         </button>
-        <button>PREFECT STUDENTS</button>
-        <button id="expelledButton">EXPELLED STUDENTS</button>
-        <button>BLODTYPE</button>
+        <button data-action="sort" data-sort-direction="asc" data-sort="prefect">PREFECT STUDENTS</button>
+        <button id="expelledButton" data-action="sort" data-sort-direction="asc" data-sort="expelled">EXPELLED STUDENTS</button>
+        <button data-action="sort" data-sort-direction="asc" data-sort="bloodtype">BLOODTYPE</button>
       </section>
     </section>
 
@@ -48,7 +49,7 @@
         </thead>
 
         <tbody>
-          <!-- animal template will be copied and inserted here -->
+          <!-- student template will be copied and inserted here -->
         </tbody>
       </table>
 

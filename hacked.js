@@ -23,16 +23,27 @@ const Student = {
 function start() {
   console.log("ready");
   loadJSON();
+  addButtons();
+
   // tilføjer eventlistners til knapperne
   // document.querySelector("#expelledButton").addEventListener("click", showExpelledStudents);
   // document.querySelector("#squadedButton").addEventListener("click", showSquadedStudents);
   // document.querySelector("#prefectedButton").addEventListener("click", showPrefectedStudents);
   // document.querySelector("#search input").addEventListener("input", searchClicked);
 }
+
+// BUTTON FILTER + SORT EVENTLISTNERS CLICK
+function addButtons() {
+  // sætter click event på filter knapper, så den kan filtrer mellem dyrne
+  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addButtons("click", selectHouse));
+  //  sætter click event på filter knapper, så den kan SORTERER
+  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addButtons("click", selectSort));
+}
+
 // MIT GAMLE JSON
 function loadJSON() {
   console.log("fetcher jsondata");
-  fetch("hacked.json")
+  fetch("https://petlatkea.dk/2021/hogwarts/students.json")
     .then((response) => response.json())
     .then((jsonData) => {
       // when loaded, prepare objects
@@ -123,6 +134,41 @@ function displayList() {
   document.querySelector("#list tbody").innerHTML = "";
   // build a new list
   allStudents.forEach(displayStudent);
+}
+
+// FILTER HOUSE FUNCTIONS
+function selectHouse(event) {
+  const filter = event.target.dataset.filter;
+  console.log(`User selected ${filter}`);
+  //   Kalder setFilter(med det selectede filter)
+  // filterList(filter);
+  setFilter(filter);
+}
+
+function setFilter(filter) {
+  // sets the global variable
+  settings.filterBy = filter;
+  buildList();
+}
+
+function filterList(filteredList) {
+  if (settings.filterBy === "cat") {
+    // Create a filtered list of only cats
+    filteredList = allAnimals.filter(isCat);
+  } else if (settings.filterBy === "dog") {
+    // Create a filtered list of only dogs
+    filteredList = allAnimals.filter(isDog);
+  }
+
+  return filteredList;
+}
+
+function isCat(animal) {
+  return animal.type === "cat";
+}
+
+function isDog(animal) {
+  return animal.type === "dog";
 }
 
 function displayStudent(student) {
