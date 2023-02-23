@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Harry Potter";
+  src: url("//db.onlinewebfonts.com/t/0421d4186d6efbfc5331fe180895e780.woff2") format("woff2");
+}
+
+h1 {
+  text-align: center;
+  margin-block: 2rem;
+  font-family: Harry Potter;
+}
+
+button {
+  font-family: Harry Potter;
+  border: none;
+}
+
+#search {
+  text-align: center;
+}
+
+#filter_buttons,
+#sort_buttons {
+  text-align: center;
+}
+
+#filter_buttons button {
+  padding: 1rem;
+  margin: 2rem 1rem;
+}
+#sort_buttons button {
+  padding: 1rem;
+  margin: 2rem 1rem;
+  border: none;
+  background-color: transparent;
+  border-bottom: solid 1px;
+}
+
+#sort_buttons button:hover {
+  border-bottom: solid 2.5px;
+}
+
+tr,
+button:hover {
+  cursor: pointer;
+}
+
+#all_students {
+  color: black;
+}
+#all_students:hover {
+  color: white;
+}
+.gryffindor {
+  background-color: #740001;
+  color: white;
+}
+.gryffindor:hover {
+  border: solid #740001;
+  background-color: transparent;
+  color: #740001;
+}
+.slytherin {
+  background-color: #1a472a;
+  color: white;
+}
+.slytherin:hover {
+  border: solid #1a472a;
+  background-color: transparent;
+  color: #1a472a;
+}
+.ravenclaw {
+  background-color: #0e1a40;
+  color: white;
+}
+.ravenclaw:hover {
+  border: solid #0e1a40;
+  background-color: transparent;
+  color: #0e1a40;
+}
+.hufflepuff {
+  background-color: #ecb939;
+  color: white;
+}
+.hufflepuff:hover {
+  border: solid #ecb939;
+  background-color: transparent;
+  color: #ecb939;
+}
+
+#list {
+  margin: auto;
+}
+
+#list td:nth-of-type(2) {
+  width: 24rem;
+  padding-left: 3rem;
+  font-size: 23px;
+}

@@ -1,0 +1,25 @@
+TO-DO:
+- Mellemnavn med bindestreg/hyphen 
+
+
+
+SHOW:
+- student list 
+- pop-up (include detailed information about each student, including photo and house-crest and colors)
+
+
+FILTER:
+- houses 
+
+
+SORTING:
+- expelled students 
+- blodtype
+- by name --> dropdown
+- prefects 
+
+
+
+SPØRGSMÅL TIL TUTOR:
+- html --> vores th, thred, er de nødvendige???
+
