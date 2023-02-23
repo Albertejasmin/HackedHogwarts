@@ -1,14 +1,20 @@
 "use strict";
 
-// JSON DATA - https://petlatkea.dk/2021/hogwarts/students.json
-
 window.addEventListener("DOMContentLoaded", start);
 
 // Global array
 const allStudents = [];
 
 // variabler
+
+const settings = {
+  filter: "all",
+  sortBy: "name",
+  sortDir: "asc",
+};
+
 let studentInfo = document.querySelector("#student");
+let filterBy = "all";
 
 // Laver prototypen til Student objects
 const Student = {
@@ -35,9 +41,10 @@ function start() {
 // BUTTON FILTER + SORT EVENTLISTNERS CLICK
 function addButtons() {
   // sætter click event på filter knapper, så den kan filtrer mellem dyrne
-  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addButtons("click", selectHouse));
+  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectHouse));
+  console.log("klik virker");
   //  sætter click event på filter knapper, så den kan SORTERER
-  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addButtons("click", selectSort));
+  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 }
 
 // MIT GAMLE JSON
@@ -50,15 +57,6 @@ function loadJSON() {
       prepareObjects(jsonData);
     });
 }
-
-// // Henter JSON data async
-// async function loadJSON() {
-//   const resStudent = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
-//   const studentData = await resStudent.json();
-//   const resBlood = await fetch("https://petlatkea.dk/2021/hogwarts/families.json");
-//   const bloodData = await resBlood.json();
-//   prepareStudents(studentData, bloodData);
-// }
 
 // Creating new array with cleaned Student data
 function prepareObjects(jsonData) {
@@ -76,7 +74,7 @@ function prepareObjects(jsonData) {
     //    MIDDLENAME
     // If there are more than 2 text in the full name, the middle name(s) are present
     if (text.length > 2) {
-      console.log(text[1].charAt(0).toUpperCase() + text[1].slice(1).toLowerCase());
+      // console.log(text[1].charAt(0).toUpperCase() + text[1].slice(1).toLowerCase());
       // Capitalize and clean the first middle name
       student.middleName = text[1].charAt(0).toUpperCase() + text[1].slice(1).toLowerCase();
     } else if (text.length === 2) {
@@ -99,7 +97,7 @@ function prepareObjects(jsonData) {
     imgSrc.src = "./images/" + lastNameImage + "_" + firstNameImage + ".png";
     // Sætningen under er det samme som ovenstående, bare ved brug af $ - de begge virker
     // imgSrc.src = `./images/${lastNameImage}_${firstNameImage}.png`;
-    console.log(student.image);
+    // console.log(student.image);
 
     if (lastNameImage === "Leanne") {
       imgSrc = "";
@@ -121,27 +119,27 @@ function prepareObjects(jsonData) {
     let nickNameClear = jsonObject.fullname.substring(jsonObject.fullname.indexOf(`"`), jsonObject.fullname.lastIndexOf(`"`) + 1);
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
-    console.log(student.nickName);
+    // console.log(student.nickName);
 
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
-  displayList();
+  // displayList();
+  buildList();
 }
 
-function displayList() {
-  // clear the list
-  document.querySelector("#list tbody").innerHTML = "";
-  // build a new list
-  allStudents.forEach(displayStudent);
-}
+// function displayList() {
+//   // clear the list
+//   document.querySelector("#list tbody").innerHTML = "";
+//   // build a new list
+//   allStudents.forEach(displayStudent);
+// }
 
 // FILTER HOUSE FUNCTIONS
 function selectHouse(event) {
   const filter = event.target.dataset.filter;
   console.log(`User selected ${filter}`);
   //   Kalder setFilter(med det selectede filter)
-  // filterList(filter);
   setFilter(filter);
 }
 
@@ -152,23 +150,52 @@ function setFilter(filter) {
 }
 
 function filterList(filteredList) {
-  if (settings.filterBy === "cat") {
+  if (settings.filterBy === "gryfindor") {
     // Create a filtered list of only cats
-    filteredList = allAnimals.filter(isCat);
-  } else if (settings.filterBy === "dog") {
+    filteredList = allAnimals.filter(isGryf);
+  } else if (settings.filterBy === "slytherin") {
     // Create a filtered list of only dogs
-    filteredList = allAnimals.filter(isDog);
+    filteredList = allAnimals.filter(isSlyt);
+  } else if (settings.filterBy === "hufflepuff") {
+    // Create a filtered list of only dogs
+    filteredList = allAnimals.filter(isHuff);
+  } else if (settings.filterBy === "ravenclaw") {
+    // Create a filtered list of only dogs
+    filteredList = allAnimals.filter(isRave);
   }
 
   return filteredList;
 }
 
-function isCat(animal) {
-  return animal.type === "cat";
+function isGryf(house) {
+  return house.type === "gryffindor";
+}
+console.log(`valgt hus ${house}`);
+
+function isSlyt(house) {
+  return house.type === "slytherin";
+}
+function isHuff(house) {
+  return house.type === "hufflepuff";
+}
+function isRave(house) {
+  return house.type === "ravenclaw";
 }
 
-function isDog(animal) {
-  return animal.type === "dog";
+function buildList() {
+  // først filterer vi
+  const currentList = filterList(allStudents);
+  const sortedList = sortList(currentList);
+  // kalder displayList med vores sortedList
+  displayList(sortedList);
+}
+
+// DISPLAY
+function displayList(students) {
+  // clear the list
+  document.querySelector("#list tbody").innerHTML = "";
+  // build a new list
+  students.forEach(displayStudent);
 }
 
 function displayStudent(student) {

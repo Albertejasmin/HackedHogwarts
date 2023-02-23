@@ -1,5 +1,6 @@
 TO-DO:
 - Mellemnavn med bindestreg/hyphen 
+- HUSK buildList();
 
 
 
