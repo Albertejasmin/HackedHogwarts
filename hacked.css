@@ -101,3 +101,40 @@ button:hover {
   padding-left: 3rem;
   font-size: 23px;
 }
+
+/* ARROW */
+#sort_buttons button.sortby[data-sort-direction="asc"]::after {
+  content: "↓";
+}
+#sort_buttons button.sortby[data-sort-direction="desc"]::after {
+  content: "↑";
+}
+
+/* DROPDOWN */
+#dropDownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+#dropDown {
+  display: none;
+  position: absolute;
+  background-color: bisque;
+  min-width: 160px;
+  z-index: 1;
+}
+
+#dropDown p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+#dropDown p:hover {
+  text-decoration: underline;
+}
+
+.show {
+  display: block;
+}

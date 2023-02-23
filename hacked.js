@@ -9,12 +9,13 @@ const allStudents = [];
 
 const settings = {
   filter: "all",
-  sortBy: "name",
+  sortBy: "fullname",
   sortDir: "asc",
 };
 
 let studentInfo = document.querySelector("#student");
 let filterBy = "all";
+let sortDropDown = "";
 
 // Laver prototypen til Student objects
 const Student = {
@@ -45,6 +46,8 @@ function addButtons() {
   console.log("klik virker");
   //  sætter click event på filter knapper, så den kan SORTERER
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  // DROPDOWN
+  document.querySelector("#hasDropDown").addEventListener("click", toggleDropDown);
 }
 
 // MIT GAMLE JSON
@@ -135,6 +138,13 @@ function prepareObjects(jsonData) {
 //   allStudents.forEach(displayStudent);
 // }
 
+// DROPDOWN
+function toggleDropDown(evt) {
+  console.log("klik drop");
+  document.querySelector("#dropDown").classList.toggle(".show");
+  let sortDropDown = evt.target.dataset.sort;
+}
+
 // FILTER HOUSE FUNCTIONS
 function selectHouse(event) {
   const filter = event.target.dataset.filter;
@@ -152,34 +162,34 @@ function setFilter(filter) {
 function filterList(filteredList) {
   if (settings.filterBy === "gryfindor") {
     // Create a filtered list of only cats
-    filteredList = allAnimals.filter(isGryf);
+    filteredList = allStudents.filter(isGryf);
   } else if (settings.filterBy === "slytherin") {
     // Create a filtered list of only dogs
-    filteredList = allAnimals.filter(isSlyt);
+    filteredList = allStudents.filter(isSlyt);
   } else if (settings.filterBy === "hufflepuff") {
     // Create a filtered list of only dogs
-    filteredList = allAnimals.filter(isHuff);
+    filteredList = allStudents.filter(isHuff);
   } else if (settings.filterBy === "ravenclaw") {
     // Create a filtered list of only dogs
-    filteredList = allAnimals.filter(isRave);
+    filteredList = allStudents.filter(isRave);
   }
 
   return filteredList;
 }
 
-function isGryf(house) {
-  return house.type === "gryffindor";
+function isGryf(student) {
+  return student.type === "gryffindor";
 }
-console.log(`valgt hus ${house}`);
+console.log(`valgt hus ${student}`);
 
-function isSlyt(house) {
-  return house.type === "slytherin";
+function isSlyt(student) {
+  return student.type === "slytherin";
 }
-function isHuff(house) {
-  return house.type === "hufflepuff";
+function isHuff(student) {
+  return student.type === "hufflepuff";
 }
-function isRave(house) {
-  return house.type === "ravenclaw";
+function isRave(student) {
+  return student.type === "ravenclaw";
 }
 
 function buildList() {
@@ -212,4 +222,60 @@ function displayStudent(student) {
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
+}
+
+// SORTING
+function selectSort(event) {
+  const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
+
+  // find "old" sortBy element and remove .sortBy
+  const oldArrow = document.querySelector(`[data-sort=${settings.sortBy}]`);
+  oldArrow.classList.remove("sortby");
+  // indicate active sort
+  event.target.classList.add("sortby");
+
+  // Toggle the direction !
+  console.log("SORT DIR", sortDir);
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+
+  console.log(`User selected ${sortBy} - ${sortDir}`);
+  //   Kalder sortList(med det valgte sorting
+  setSort(sortBy, sortDir);
+}
+
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
+}
+
+function sortList(sortedList) {
+  // let sortedList = allAnimals;
+  let direction = 1;
+  if (settings.sortDir === "desc") {
+    direction = -1;
+  } else {
+    settings.direction = 1;
+  }
+  // Hvis sortedList = er "sorted" by name / .sort (en array methods)
+  sortedList = sortedList.sort(sortByProperty);
+
+  // SORTING BY  NAME med CLOSURE !! nødvendigt for at vi kan bruge sortBy parametret
+  function sortByProperty(A_Z, Z_A) {
+    // console.log(`SortBy is ${sortBy}`);
+    // siger hvis animalA kommer før < animalB
+    if (A_Z[settings.sortBy] < Z_A[settings.sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
+    }
+  }
+
+  // husk at return listen
+  return sortedList;
 }

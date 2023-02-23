@@ -1,7 +1,7 @@
 TO-DO:
 - Mellemnavn med bindestreg/hyphen 
-- HUSK buildList();
-
+- sortDirection på firstname + lastname
+- tjek op på fullname ud fra sort knappen sort by name 
 
 
 SHOW:
@@ -23,4 +23,5 @@ SORTING:
 
 SPØRGSMÅL TIL TUTOR:
 - html --> vores th, thred, er de nødvendige???
+- FÅ dem til at lave vores dropdown, gerne en smart måde
 

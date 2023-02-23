@@ -24,13 +24,19 @@
       </section>
 
       <section id="sort_buttons">
-        <button data-action="sort" data-sort-direction="asc" data-sort="name">
-          SORT BY NAME
-          <span>↓</span>
-        </button>
-        <button data-action="sort" data-sort-direction="asc" data-sort="prefect">PREFECT STUDENTS</button>
-        <button id="expelledButton" data-action="sort" data-sort-direction="asc" data-sort="expelled">EXPELLED STUDENTS</button>
-        <button data-action="sort" data-sort-direction="asc" data-sort="bloodtype">BLOODTYPE</button>
+        <div id="dropDownContainer">
+          <button id="hasDropDown">
+            SORT BY NAME
+            <span>↓</span>
+          </button>
+          <div id="dropDown">
+            <p data-action="sort" data-sort-direction="asc" data-sort="fullname">Firstname</p>
+            <p data-action="sort" data-sort-direction="asc" data-sort="fullname">Lastname</p>
+          </div>
+        </div>
+        <button data-action="sort" data-sort="prefect">PREFECT STUDENTS</button>
+        <button id="expelledButton" data-action="sort" data-sort="expelled">EXPELLED STUDENTS</button>
+        <button data-action="sort" data-sort="bloodtype">BLOODTYPE</button>
       </section>
     </section>
 
