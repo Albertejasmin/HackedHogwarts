@@ -202,10 +202,26 @@ button:hover {
 }
 
 #studentInfo {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
 }
 
 #image img {
-  width: 30%;
-  height: 30%;
+  display: grid;
+  min-width: 70%;
+  place-items: end;
+}
+
+#image {
+  display: grid;
+  place-items: center end;
+}
+
+.studentName {
+  display: grid;
+  place-items: center start;
+}
+
+.studentName p {
 }
