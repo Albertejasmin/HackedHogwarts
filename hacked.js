@@ -25,6 +25,10 @@ const Student = {
   nickName: "",
   image: "",
   house: "",
+  prefect: "",
+  bloodtype: "",
+  inqusitorial: "",
+  expelled: "",
 };
 
 function start() {
