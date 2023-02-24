@@ -48,6 +48,7 @@ function addButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   // DROPDOWN
   document.querySelector("#hasDropDown").addEventListener("click", toggleDropDown);
+  document.querySelector("#dropDown p").addEventListener("click", toggleDropDown);
 }
 
 // MIT GAMLE JSON
@@ -130,13 +131,6 @@ function prepareObjects(jsonData) {
   // displayList();
   buildList();
 }
-
-// function displayList() {
-//   // clear the list
-//   document.querySelector("#list tbody").innerHTML = "";
-//   // build a new list
-//   allStudents.forEach(displayStudent);
-// }
 
 // DISPLAY
 function displayList(students) {
@@ -232,6 +226,12 @@ function buildList() {
   // console.log("displayList kaldes", currentList);
 }
 
+// Capitalize function
+function capitalize(str) {
+  const capStr = str.toUpperCase();
+  return capStr;
+}
+
 // SORTING
 function selectSort(event) {
   console.log("selectSort", event);
@@ -247,8 +247,10 @@ function selectSort(event) {
   // Toggle the direction !
   if (sortDir === "asc") {
     event.target.dataset.sortDirection = "desc";
+    document.querySelector("#hasDropDown span").textContent = `${capitalize(sortBy)} ( A - Z )`;
   } else {
     event.target.dataset.sortDirection = "asc";
+    document.querySelector("#hasDropDown span").textContent = `${capitalize(sortBy)} ( Z - A )`;
   }
 
   console.log(`User selected ${sortBy} - ${sortDir}`);
