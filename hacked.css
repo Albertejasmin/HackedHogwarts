@@ -117,7 +117,7 @@ button:hover {
 }
 
 #dropDown {
-  display: none;
+  /* display: none; */
   position: absolute;
   background-color: bisque;
   min-width: 160px;
@@ -135,6 +135,10 @@ button:hover {
   text-decoration: underline;
 }
 
-.show {
+/* .show {
   display: block;
+} */
+
+.hide {
+  display: none;
 }

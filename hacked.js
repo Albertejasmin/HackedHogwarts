@@ -9,7 +9,7 @@ const allStudents = [];
 
 const settings = {
   filter: "all",
-  sortBy: "fullname",
+  sortBy: "house",
   sortDir: "asc",
 };
 
@@ -166,8 +166,8 @@ function displayStudent(student) {
 // DROPDOWN
 function toggleDropDown(evt) {
   console.log("klik drop");
-  document.querySelector("#dropDown").classList.toggle(".show");
-  let sortDropDown = evt.target.dataset.sort;
+  document.querySelector("#dropDown").classList.toggle("hide");
+  // let sortDropDown = evt.target.dataset.sort;
 }
 
 // FILTER HOUSE FUNCTIONS
@@ -208,18 +208,18 @@ function filterList(filteredList) {
 }
 
 function isGryf(student) {
-  return student.house === "gryffindor";
+  return student.house === "Gryffindor";
 }
 console.log(`valgt hus ${student}`);
 
 function isSlyt(student) {
-  return student.house === "slytherin";
+  return student.house === "Slytherin";
 }
 function isHuff(student) {
-  return student.house === "hufflepuff";
+  return student.house === "Hufflepuff";
 }
 function isRave(student) {
-  return student.house === "ravenclaw";
+  return student.house === "Ravenclaw";
 }
 
 function buildList() {
@@ -228,11 +228,13 @@ function buildList() {
   const sortedList = sortList(currentList);
   // kalder displayList med vores sortedList
   displayList(sortedList);
-  console.log("displayList kaldes");
+  // console.log("displayList kaldes", allStudents);
+  // console.log("displayList kaldes", currentList);
 }
 
 // SORTING
 function selectSort(event) {
+  console.log("selectSort", event);
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
 
@@ -243,7 +245,6 @@ function selectSort(event) {
   // event.target.classList.add("sortby");
 
   // Toggle the direction !
-  console.log("SORT DIR", sortDir);
   if (sortDir === "asc") {
     event.target.dataset.sortDirection = "desc";
   } else {
