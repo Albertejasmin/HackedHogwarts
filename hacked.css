@@ -142,3 +142,70 @@ button:hover {
 .hide {
   display: none;
 }
+
+/* POPUP STUDENT */
+
+#popupContainer {
+  /* display: none; */
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  background-color: #777777;
+  color: black;
+}
+#studentInfo {
+  display: flex;
+  width: 700px;
+  height: 300px;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+#buttonsPopup button {
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #dbdbdb;
+}
+
+#buttonsPopup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.moreInfo {
+  display: flex;
+  justify-content: center;
+}
+
+.moreInfo p {
+  padding: 1rem;
+}
+
+/* baggrund til popup */
+.darkBackground {
+  background-color: rgba(0, 0, 0, 0.809);
+}
+
+/* lukknap popup */
+.closebtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2em;
+  height: 2em;
+  z-index: 1;
+  margin: 1em;
+  cursor: pointer;
+}
+
+#studentInfo {
+  display: flex;
+}
+
+#image img {
+  width: 30%;
+  height: 30%;
+}

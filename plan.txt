@@ -1,6 +1,6 @@
 TO-DO:
 - Tegn blodtyper i illustrator :) 
-- 
+- Lav popup på student
 - Mellemnavn med bindestreg/hyphen 
 - click event i en function --> smart måde??
 - Hvorfor skirfter tekst sortBy i vores "sort by name" 
