@@ -1,6 +1,7 @@
 TO-DO:
 - Tegn blodtyper i illustrator :) 
-- Lav popup på student
+- få baggrund til popup til at skifte alt efter house
+
 - Mellemnavn med bindestreg/hyphen 
 - click event i en function --> smart måde??
 - Hvorfor skirfter tekst sortBy i vores "sort by name" 
@@ -9,7 +10,8 @@ TO-DO:
 
 DID: 
 - sortDirection på firstname + lastname
-- tjek op på fullname ud fra sort knappen sort by name 
+- tjek op på fullname ud fra sort knappen sort by name
+- Lavet popup på student 
 
 
 

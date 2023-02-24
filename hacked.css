@@ -221,7 +221,5 @@ button:hover {
 .studentName {
   display: grid;
   place-items: center start;
-}
-
-.studentName p {
+  margin-block: 2rem;
 }
