@@ -153,7 +153,7 @@ function displayStudent(student) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
   // set clone data
   clone.querySelector("[data-field=fullname]").textContent = student.firstName + " " + student.lastName;
-  // clone.querySelector("[data-field=firstname]").textContent = student.firstName;
+  clone.querySelector("[data-field=firstname]").textContent = student.firstName;
   // clone.querySelector("[data-field=middlename]").textContent = student.middleName;
   // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
@@ -303,8 +303,23 @@ function clickStudent() {
   let popup = document.querySelector("#popupContainer");
   popup.classList.add("show");
   popup.style.display = "block";
+
+  // Listen for click on close button
   document.querySelector(".closebtn").addEventListener("click", closePopup);
+
+  // Make element visible
+  let jasonDataStudent = document.querySelector("#student");
+  jasonDataStudent.classList.add("show");
+  jasonDataStudent.style.display = "block";
+
+  // Get the first name from the student object
+  let dataName = student.firstName;
+
+  // Update the HTML with the first name
+  let htmlPTags = document.querySelectorAll(".studentName p");
+  htmlPTags[0].textContent = "Firstname: " + dataName;
 }
+
 /* luk popup */
 function closePopup() {
   let closePopup = document.querySelector("#popupContainer");
