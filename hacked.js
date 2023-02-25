@@ -52,7 +52,9 @@ function addButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   // DROPDOWN
   document.querySelector("#hasDropDown").addEventListener("click", toggleDropDown);
-  document.querySelector("#dropDown p").addEventListener("click", toggleDropDown);
+  document.querySelectorAll("#dropDown p").forEach(function (element) {
+    element.addEventListener("click", toggleDropDown);
+  });
 
   /* CLICK STUDENT - POPUP */
   document.querySelector("#list tbody").addEventListener("click", clickStudent);
@@ -168,7 +170,6 @@ function displayStudent(student) {
 function toggleDropDown(evt) {
   console.log("klik drop");
   document.querySelector("#dropDown").classList.toggle("hide");
-  // let sortDropDown = evt.target.dataset.sort;
 }
 
 // FILTER HOUSE FUNCTIONS
@@ -306,18 +307,6 @@ function clickStudent() {
 
   // Listen for click on close button
   document.querySelector(".closebtn").addEventListener("click", closePopup);
-
-  // Make element visible
-  let jasonDataStudent = document.querySelector("#student");
-  jasonDataStudent.classList.add("show");
-  jasonDataStudent.style.display = "block";
-
-  // Get the first name from the student object
-  let dataName = student.firstName;
-
-  // Update the HTML with the first name
-  let htmlPTags = document.querySelectorAll(".studentName p");
-  htmlPTags[0].textContent = "Firstname: " + dataName;
 }
 
 /* luk popup */
