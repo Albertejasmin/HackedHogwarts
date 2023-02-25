@@ -300,10 +300,22 @@ function sortList(sortedList) {
 
 /* POPUP STUDENT */
 /* vis popup  */
-function clickStudent() {
+function clickStudent(student) {
   let popup = document.querySelector("#popupContainer");
   popup.classList.add("show");
   popup.style.display = "block";
+
+  // Make element visible
+  let jasonDataStudent = document.querySelector("#student");
+  jasonDataStudent.classList.add("show");
+  jasonDataStudent.style.display = "block";
+
+  // Get firstname from the student object OBS den kan ikke finde dette ???
+  let dataName = student.firstName;
+
+  // Update the HTML with the first name
+  let htmlPTags = document.querySelectorAll(".studentName p");
+  htmlPTags[0].textContent = "Firstname: " + dataName;
 
   // Listen for click on close button
   document.querySelector(".closebtn").addEventListener("click", closePopup);
