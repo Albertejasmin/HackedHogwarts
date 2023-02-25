@@ -155,6 +155,7 @@ button:hover {
   background-color: #777777;
   color: black;
 }
+
 #studentInfo {
   display: flex;
   width: 700px;
@@ -222,4 +223,12 @@ button:hover {
   display: grid;
   place-items: center start;
   margin-block: 2rem;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

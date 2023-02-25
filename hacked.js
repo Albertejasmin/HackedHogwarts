@@ -53,6 +53,9 @@ function addButtons() {
   // DROPDOWN
   document.querySelector("#hasDropDown").addEventListener("click", toggleDropDown);
   document.querySelector("#dropDown p").addEventListener("click", toggleDropDown);
+
+  /* CLICK STUDENT - POPUP */
+  document.querySelector("#list tbody").addEventListener("click", clickStudent);
 }
 
 // MIT GAMLE JSON
@@ -293,3 +296,20 @@ function sortList(sortedList) {
   // husk at return listen
   return sortedList;
 }
+
+/* POPUP STUDENT */
+/* vis popup  */
+function clickStudent() {
+  let popup = document.querySelector("#popupContainer");
+  popup.classList.add("show");
+  popup.style.display = "block";
+  document.querySelector(".closebtn").addEventListener("click", closePopup);
+}
+/* luk popup */
+function closePopup() {
+  let closePopup = document.querySelector("#popupContainer");
+  closePopup.classList.add("hide");
+  closePopup.style.display = "none";
+}
+
+/* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
