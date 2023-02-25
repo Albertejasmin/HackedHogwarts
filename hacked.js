@@ -45,13 +45,14 @@ function start() {
 
 // BUTTON FILTER + SORT EVENTLISTNERS CLICK
 function addButtons() {
-  // sætter click event på filter knapper, så den kan filtrer mellem dyrne
+  // sætter click event på filter knapper, så den kan filtrer mellem husene
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectHouse));
   console.log("klik virker");
   //  sætter click event på filter knapper, så den kan SORTERER
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   // DROPDOWN
   document.querySelector("#hasDropDown").addEventListener("click", toggleDropDown);
+  /* Bliver nødt til at lave forEach for at den tager fat i begge p tags og dermed lukker uansetm om klik på fornavn eller efternavn */
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
