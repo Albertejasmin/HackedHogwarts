@@ -58,7 +58,7 @@ function addButtons() {
   });
 
   /* CLICK STUDENT - POPUP */
-  document.querySelector("#list tbody").addEventListener("click", clickStudent);
+  //document.querySelector("#list tbody").addEventListener("click", clickStudent);
 
   /* Click search */
   /* document.querySelector("#searchBtn").addEventListener("click", search); */
@@ -185,10 +185,62 @@ function displayStudent(student) {
   clone.querySelector("[data-field=house]").textContent = student.house;
 
   /* CLICK STUDENT POPUP */
-  /* clone.querySelector("#list tbody").addEventListener("click", () => clickStudent(student)); */
+  clone.querySelector("tr").addEventListener("click", showPopup);
+
+  /* POPUP STUDENT */
+  /* vis popup  */
+  function showPopup() {
+    let popup = document.querySelector("#popupContainer");
+    popup.classList.add("show");
+    popup.style.display = "block";
+
+    // Make element visible
+    let jasonDataStudent = document.querySelector("#student");
+    jasonDataStudent.classList.add("show");
+    jasonDataStudent.style.display = "block";
+
+    // Get firstname from the student object OBS den kan ikke finde dette ???
+    let firstNamePop = student.firstName;
+    let middleNamePop = student.middleName;
+    let lastNamePop = student.lastName;
+    let nickNamePop = student.nickName;
+    // let imagePop = student.image;
+
+    // Update the HTML with the first name
+    // let getImg = document.querySelector("#studentInfo img");
+    let htmlPTags = document.querySelectorAll(".studentName p");
+    htmlPTags[0].textContent = "Firstname: " + firstNamePop;
+    htmlPTags[1].textContent = "Middlename: " + middleNamePop;
+    htmlPTags[2].textContent = "Lastname: " + lastNamePop;
+    htmlPTags[3].textContent = "Nickname: " + nickNamePop;
+    // getImg = setAttribute("src", imagePop);
+
+    // change background based on house
+    if (student.house === "Gryffindor") {
+      document.querySelector("#popupContainer").style.backgroundColor = "#7f0909";
+    } else if (student.house === "Slytherin") {
+      document.querySelector("#popupContainer").style.backgroundColor = "#1a472a";
+    } else if (student.house === "Hufflepuff") {
+      document.querySelector("#popupContainer").style.backgroundColor = "#ecb939";
+    } else if (student.house === "Ravenclaw") {
+      document.querySelector("#popupContainer").style.backgroundColor = "#0e1a40";
+    } else {
+      document.querySelector("#popupContainer").style.backgroundColor = "white";
+    }
+
+    // Listen for click on close button
+    document.querySelector(".closebtn").addEventListener("click", closePopup);
+  }
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
+}
+
+/* luk popup */
+function closePopup() {
+  let closePopup = document.querySelector("#popupContainer");
+  closePopup.classList.add("hide");
+  closePopup.style.display = "none";
 }
 
 // DROPDOWN
@@ -257,6 +309,7 @@ function buildList() {
   displayList(sortedList);
   // console.log("displayList kaldes", allStudents);
   // console.log("displayList kaldes", currentList);
+  document.querySelector("h3").textContent = `The list has ${sortedList.length} students`;
 }
 
 // Capitalize function
@@ -321,49 +374,6 @@ function sortList(sortedList) {
 
   // husk at return listen
   return sortedList;
-}
-
-/* POPUP STUDENT */
-/* vis popup  */
-function clickStudent() {
-  let popup = document.querySelector("#popupContainer");
-  popup.classList.add("show");
-  popup.style.display = "block";
-
-  // Make element visible
-  let jasonDataStudent = document.querySelector("#student");
-  jasonDataStudent.classList.add("show");
-  jasonDataStudent.style.display = "block";
-
-  // Get firstname from the student object OBS den kan ikke finde dette ???
-  let dataName = student.firstName;
-
-  // Update the HTML with the first name
-  let htmlPTags = document.querySelectorAll(".studentName p");
-  htmlPTags[0].textContent = "Firstname: " + dataName;
-
-  // change background based on house
-  if (student.house === "Gryffindor") {
-    document.querySelector("#popupContainer").style.backgroundColor = "#7f0909";
-  } else if (student.house === "Slytherin") {
-    document.querySelector("#popupContainer").style.backgroundColor = "#1a472a";
-  } else if (student.house === "Hufflepuff") {
-    document.querySelector("#popupContainer").style.backgroundColor = "#ecb939";
-  } else if (student.house === "Ravenclaw") {
-    document.querySelector("#popupContainer").style.backgroundColor = "#0e1a40";
-  } else {
-    document.querySelector("#popupContainer").style.backgroundColor = "white";
-  }
-
-  // Listen for click on close button
-  document.querySelector(".closebtn").addEventListener("click", closePopup);
-}
-
-/* luk popup */
-function closePopup() {
-  let closePopup = document.querySelector("#popupContainer");
-  closePopup.classList.add("hide");
-  closePopup.style.display = "none";
 }
 
 /* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
