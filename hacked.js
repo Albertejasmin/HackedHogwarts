@@ -316,5 +316,3 @@ function closePopup() {
   closePopup.classList.add("hide");
   closePopup.style.display = "none";
 }
-
-/* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
