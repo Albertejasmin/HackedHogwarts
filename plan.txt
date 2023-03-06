@@ -2,6 +2,7 @@ TO-DO:
 - Tegn blodtyper i illustrator :) 
 - få baggrund til popup til at skifte alt efter house
 - skal der står house i popup student?
+- total count (length array)
 
 - Mellemnavn med bindestreg/hyphen 
 - click event i en function --> smart måde??

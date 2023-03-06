@@ -58,9 +58,28 @@ function addButtons() {
 
   /* CLICK STUDENT - POPUP */
   document.querySelector("#list tbody").addEventListener("click", clickStudent);
+
+  /* Click search */
+  /* document.querySelector("#searchBtn").addEventListener("click", search); */
 }
 
-// MIT GAMLE JSON
+/* SEARCH */
+/* function search() {
+  let input = document.querySelector("#search");
+  let filterSearch = filteredList;
+  let ul = document.querySelector("#search_results");
+  let li = ul.querySelectorAll("li");
+  for (let i = 0; i < li.length; i++) {
+    let text = li[i].textContent.toUpperCase();
+    if (text.indexOf(filterSearch) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+} */
+
+// Load json
 function loadJSON() {
   console.log("fetcher jsondata");
   fetch("https://petlatkea.dk/2021/hogwarts/students.json")
@@ -139,6 +158,8 @@ function prepareObjects(jsonData) {
   });
   // displayList();
   buildList();
+
+  /* CLICK STUDENT - POPUP */
 }
 
 // DISPLAY
@@ -161,6 +182,9 @@ function displayStudent(student) {
   // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
   clone.querySelector("[data-field=image] img").src = student.image.src;
   clone.querySelector("[data-field=house]").textContent = student.house;
+
+  /* CLICK STUDENT POPUP */
+  /* clone.querySelector("#list tbody").addEventListener("click", () => clickStudent(student)); */
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
@@ -300,7 +324,7 @@ function sortList(sortedList) {
 
 /* POPUP STUDENT */
 /* vis popup  */
-function clickStudent(student) {
+function clickStudent() {
   let popup = document.querySelector("#popupContainer");
   popup.classList.add("show");
   popup.style.display = "block";
@@ -317,6 +341,19 @@ function clickStudent(student) {
   let htmlPTags = document.querySelectorAll(".studentName p");
   htmlPTags[0].textContent = "Firstname: " + dataName;
 
+  // change background based on house
+  if (student.house === "Gryffindor") {
+    document.querySelector("#popupContainer").style.backgroundColor = "#7f0909";
+  } else if (student.house === "Slytherin") {
+    document.querySelector("#popupContainer").style.backgroundColor = "#1a472a";
+  } else if (student.house === "Hufflepuff") {
+    document.querySelector("#popupContainer").style.backgroundColor = "#ecb939";
+  } else if (student.house === "Ravenclaw") {
+    document.querySelector("#popupContainer").style.backgroundColor = "#0e1a40";
+  } else {
+    document.querySelector("#popupContainer").style.backgroundColor = "white";
+  }
+
   // Listen for click on close button
   document.querySelector(".closebtn").addEventListener("click", closePopup);
 }
@@ -329,3 +366,5 @@ function closePopup() {
 }
 
 /* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
+
+/* search */
