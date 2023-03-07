@@ -59,26 +59,7 @@ function addButtons() {
 
   /* CLICK STUDENT - POPUP */
   //document.querySelector("#list tbody").addEventListener("click", clickStudent);
-
-  /* Click search */
-  document.querySelector("#search").addEventListener("input", search);
 }
-
-/* SEARCH */
-/* function search() {
-  let input = document.querySelector("#search");
-  let filterSearch = filteredList;
-  let ul = document.querySelector("#search_results");
-  let li = ul.querySelectorAll("li");
-  for (let i = 0; i < li.length; i++) {
-    let text = li[i].textContent.toUpperCase();
-    if (text.indexOf(filterSearch) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-} */
 
 // Load json
 function loadJSON() {
@@ -310,32 +291,35 @@ function buildList() {
   // console.log("displayList kaldes", allStudents);
   // console.log("displayList kaldes", currentList);
   document.querySelector("h3").textContent = `The list has ${sortedList.length} students`;
-}
 
-/* search */
-function search(evt) {
-  const input = evt.target.value;
+  /* Click search */
+  document.querySelector("#search").addEventListener("input", search);
 
-  const searchStudents = sortedList.filter((student) => {
-    const fullStudentName = `${student.firstName} ${student.middleName} ${student.nickName} ${student.lastName}`;
+  /* search */
+  function search(evt) {
+    const input = evt.target.value;
 
-    if (fullStudentName.toLowerCase().includes(input.toLowerCase())) {
-      return true;
-    } else {
-      return false;
+    const searchStudents = sortedList.filter((student) => {
+      const fullStudentName = `${student.firstName} ${student.middleName} ${student.nickName} ${student.lastName}`;
+
+      if (fullStudentName.toLowerCase().includes(input.toLowerCase())) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    displayList(searchStudents);
+
+    document.querySelector("h3").textContent = `The list has ${searchStudents.length} students`;
+
+    if (searchStudents.length === 1) {
+      document.querySelector("h3").textContent = `The list has 1 student`;
     }
-  });
 
-  displayList(searchStudents);
-
-  document.querySelector("h3").textContent = `The list has ${searchStudents.length} students`;
-
-  if (searchStudents.length === 1) {
-    document.querySelector("h3").textContent = `The list has 1 student`;
-  }
-
-  if (searchStudents.length === 0) {
-    document.querySelector("h3").textContent = `No match`;
+    if (searchStudents.length === 0) {
+      document.querySelector("h3").textContent = `No match`;
+    }
   }
 }
 
