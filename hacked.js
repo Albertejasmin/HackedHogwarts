@@ -81,19 +81,20 @@ function addButtons() {
 } */
 
 // Load json
-function loadJSON() {
+async function loadJSON() {
   console.log("fetcher jsondata");
-  fetch("https://petlatkea.dk/2021/hogwarts/students.json")
-    .then((response) => response.json())
-    .then((jsonData) => {
-      // when loaded, prepare objects
-      prepareObjects(jsonData);
-    });
+  const studentJSON = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
+  const studentData = await studentJSON.json();
+  const bloodJSON = await fetch("https://petlatkea.dk/2021/hogwarts/families.json");
+  const bloodData = await bloodJSON.json();
+  // when loaded, prepare objects
+  prepareObjects(studentData, bloodData);
 }
+console.log("prepare", prepareObjects());
 
 // Creating new array with cleaned Student data
-function prepareObjects(jsonData) {
-  jsonData.forEach((jsonObject) => {
+function prepareObjects(studentData, bloodData) {
+  studentData.forEach((jsonObject) => {
     // TODO: Create new object with cleaned data - and store that in the allAnimals array
     const student = Object.create(Student);
 

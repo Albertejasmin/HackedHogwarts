@@ -224,6 +224,11 @@ button:hover {
   place-items: center start;
   margin-block: 2rem;
 }
+.studentName p,
+.moreInfo p,
+.closebtn {
+  color: whitesmoke;
+}
 
 .show {
   display: block;
