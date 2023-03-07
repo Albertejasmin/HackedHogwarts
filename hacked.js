@@ -228,24 +228,51 @@ function displayStudent(student) {
     } else {
       document.querySelector("#prefectText").textContent = "Prefect: No";
     }
-    // Tilføj prefect function
+
+    // TILFØJER PREFECT
     console.log("student", student);
+
     function makePrefect() {
       if (student.prefect === true) {
         student.prefect = false;
-      } else {
-        student.prefect = true;
+      } else if (student.prefect === false) {
+        tryMakePrefect(student);
       }
+
       if (student.prefect === true) {
         document.querySelector("#prefectText").textContent = "Prefect: Yes";
       } else {
         document.querySelector("#prefectText").textContent = "Prefect: No";
       }
       //console.log("student.prefect", student.prefect)
-
-      buildList();
+      // PREFECT
+      function tryMakePrefect(selectedPrefect) {
+        // liste af alle prefects
+        console.log(selectedPrefect.lastName);
+        const prefects = allStudents.filter((student) => student.prefect === true);
+        prefects.push(selectedPrefect);
+        console.log("allStudents", allStudents);
+        console.log("prefects", prefects);
+        // for at få antallet af prefects
+        const numberOfPrefects = prefects.length;
+        console.log("tryMakePrefect numberOfPrefects", numberOfPrefects);
+        // finder gamle prefects
+        const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.prefect).shift();
+        // const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.house).shift();
+        console.log("firstPrefect", firstPrefect);
+        if (firstPrefect !== undefined) {
+          console.log("kan kun være en vinder fra hvert hus");
+        } else if (numberOfPrefects >= 2) {
+          console.log("der kan kun være 2 vindere, vil du fjerne en?");
+        } else {
+          //    makePrefect(selectedPrefect);
+          console.log("ELSE ELSE");
+          student.prefect = true;
+          console.log("laver vinder");
+        }
+        buildList();
+      }
     }
-
     // Listen for click on close button
     document.querySelector(".closebtn").addEventListener("click", closePopup);
   }
