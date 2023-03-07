@@ -56,6 +56,12 @@ function addButtons() {
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
+
+  /* CLICK STUDENT - POPUP */
+  //document.querySelector("#list tbody").addEventListener("click", clickStudent);
+
+  /* Click search */
+  /* document.querySelector("#searchBtn").addEventListener("click", search); */
 }
 
 // Load json
@@ -323,6 +329,36 @@ function buildList() {
   // console.log("displayList kaldes", allStudents);
   // console.log("displayList kaldes", currentList);
   document.querySelector("h3").textContent = `The list has ${sortedList.length} students`;
+
+  /* Click search */
+  document.querySelector("#search").addEventListener("input", search);
+
+  /* search */
+  function search(evt) {
+    const input = evt.target.value;
+
+    const searchStudents = sortedList.filter((student) => {
+      const fullStudentName = `${student.firstName} ${student.middleName} ${student.nickName} ${student.lastName}`;
+
+      if (fullStudentName.toLowerCase().includes(input.toLowerCase())) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    displayList(searchStudents);
+
+    document.querySelector("h3").textContent = `The list has ${searchStudents.length} students`;
+
+    if (searchStudents.length === 1) {
+      document.querySelector("h3").textContent = `The list has 1 student`;
+    }
+
+    if (searchStudents.length === 0) {
+      document.querySelector("h3").textContent = `No match`;
+    }
+  }
 }
 
 // Capitalize function
@@ -390,5 +426,3 @@ function sortList(sortedList) {
 }
 
 /* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
-
-/* search */
