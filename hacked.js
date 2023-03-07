@@ -39,8 +39,6 @@ function start() {
   // tilføjer eventlistners til knapperne
   // document.querySelector("#expelledButton").addEventListener("click", showExpelledStudents);
   // document.querySelector("#squadedButton").addEventListener("click", showSquadedStudents);
-  // document.querySelector("#prefectedButton").addEventListener("click", showPrefectedStudents);
-  // document.querySelector("#search input").addEventListener("input", searchClicked);
 }
 
 // BUTTON FILTER + SORT EVENTLISTNERS CLICK
@@ -57,11 +55,6 @@ function addButtons() {
     element.addEventListener("click", toggleDropDown);
   });
 
-  /* CLICK STUDENT - POPUP */
-  //document.querySelector("#list tbody").addEventListener("click", clickStudent);
-
-  /* Click search */
-  /* document.querySelector("#searchBtn").addEventListener("click", search); */
 }
 
 // Load json
@@ -137,7 +130,7 @@ function prepareObjects(jsonData) {
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
-    student.prefect = false;
+  
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
@@ -195,7 +188,6 @@ function displayStudent(student) {
     // Update the HTML with the first name
     // let getImg = document.querySelector("#studentInfo img");
     let namePop = document.querySelectorAll(".studentName p");
-    let statusPop = document.querySelector("#prefectText");
     namePop[0].textContent = "Firstname: " + firstNamePop;
     namePop[1].textContent = "Middlename: " + middleNamePop;
     namePop[2].textContent = "Lastname: " + lastNamePop;
@@ -216,10 +208,6 @@ function displayStudent(student) {
     }
 
     // PREFECT
-    // console.log("clone", clone);
-    console.log("student.prefect", student.prefect);
-    console.log("********************************");
-
     // click prefect
     document.querySelector("#prefectBtn").addEventListener("click", makePrefect);
     console.log("clicked prefect");
@@ -230,8 +218,6 @@ function displayStudent(student) {
     }
 
     // TILFØJER PREFECT
-    console.log("student", student);
-
     function makePrefect() {
       if (student.prefect === true) {
         student.prefect = false;
