@@ -216,20 +216,18 @@ function displayStudent(student) {
     }
 
     // PREFECT
-    // console.log("clone", clone);
-    console.log("student.prefect", student.prefect);
-    console.log("********************************");
 
     // click prefect
     document.querySelector("#prefectBtn").addEventListener("click", makePrefect);
     console.log("clicked prefect");
+    //TextConrtent Yes/No
     if (student.prefect === true) {
       document.querySelector("#prefectText").textContent = "Prefect: Yes";
     } else {
       document.querySelector("#prefectText").textContent = "Prefect: No";
     }
 
-    // TILFØJER PREFECT
+    // TILFØJER PREFECT TIL ARRAY
     console.log("student", student);
 
     function makePrefect() {
@@ -238,6 +236,7 @@ function displayStudent(student) {
       } else if (student.prefect === false) {
         tryMakePrefect(student);
       }
+      buildList();
 
       if (student.prefect === true) {
         document.querySelector("#prefectText").textContent = "Prefect: Yes";
@@ -245,54 +244,126 @@ function displayStudent(student) {
         document.querySelector("#prefectText").textContent = "Prefect: No";
       }
       //console.log("student.prefect", student.prefect)
-      // PREFECT
-      function tryMakePrefect(selectedPrefect) {
-        // liste af alle prefects
-        console.log(selectedPrefect.lastName);
-        const prefects = allStudents.filter((student) => student.prefect === true);
-        prefects.push(selectedPrefect);
-        console.log("allStudents", allStudents);
-        console.log("prefects", prefects);
-        // for at få antallet af prefects
-        const numberOfPrefects = prefects.length;
-        console.log("tryMakePrefect numberOfPrefects", numberOfPrefects);
-        // finder gamle prefects
-        const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.prefect).shift();
-        // const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.house).shift();
-        console.log("firstPrefect", firstPrefect);
-        if (firstPrefect !== undefined) {
-          console.log("kan kun være en vinder fra hvert hus");
-        } else if (numberOfPrefects >= 2) {
-          console.log("der kan kun være 2 vindere, vil du fjerne en?");
-        } else {
-          //    makePrefect(selectedPrefect);
-          console.log("ELSE ELSE");
-          student.prefect = true;
-          console.log("laver vinder");
+    }
+
+    // PREFECT
+    function tryMakePrefect(selectedPrefect) {
+      // liste af alle prefects
+      console.log(selectedPrefect.lastName);
+
+      const prefects = allStudents.filter((student) => student.prefect === true);
+      // prefects.push(selectedPrefect);
+      console.log("allStudents", allStudents);
+      console.log("prefects", prefects);
+      // for at få antallet af prefects
+      const numberOfPrefects = prefects.length;
+      console.log("tryMakePrefect numberOfPrefects", numberOfPrefects);
+      // finder gamle prefects
+      const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.prefect).shift();
+      // const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.house).shift();
+      console.log("firstPrefect", firstPrefect);
+      if (firstPrefect !== undefined) {
+        console.log("kan kun være en vinder fra hvert hus");
+        removeFirstPrefect(firstPrefect);
+      } else if (numberOfPrefects >= 2) {
+        console.log("der kan kun være 2 vindere, vil du fjerne en?");
+        removeAorB(prefects[0], prefects[1]);
+      } else {
+        //    makePrefect(selectedPrefect);
+        makePrefect(selectedPrefect);
+        console.log("laver vinder");
+      }
+
+      function removeFirstPrefect(firstPrefect) {
+        /* ignore or remove other - her skal vi spørge brugeren om at ignore en eller remove en*/
+        document.querySelector("#remove_other").classList.remove("hide");
+        document.querySelector("#remove_other .closebtn").addEventListener("click", closeDialog);
+        document.querySelector("#remove_other #remove_other_btn").addEventListener("click", clickRemoveFirstPrefect);
+        /* dette viser navnet istedet for at der bare står remove other */
+        document.querySelector("#remove_other_btn [data-field=otherPrefect]").textContent = firstPrefect.firstName;
+        /* hvis ignoreret skal der ikke ske noget */
+
+        function closeDialog() {
+          document.querySelector("#remove_other").classList.add("hide");
+          document.querySelector("#remove_other .closebtn").removeEventListener("click", closeDialog);
+          document.querySelector("#remove_other #remove_other_btn").removeEventListener("click", clickRemoveFirstPrefect);
         }
-        buildList();
+
+        function clickRemoveFirstPrefect() {
+          /* if remove other */
+          // removePrefect(firstPrefect);
+          makePrefect(selectedPrefect);
+          /* denne kaldes for at knapperne får fjernet eventlistener */
+          buildList();
+          closeDialog();
+        }
+      }
+
+      // REMOVE PREFECTS
+      function removeAorB(prefectA, prefectB) {
+        /* spørg brugeren om at ignorere. Eller remove A eller B */
+        document.querySelector("#remove_AorB").classList.remove("hide");
+        document.querySelector("#remove_AorB .closebtn").addEventListener("click", closeDialog);
+        document.querySelector("#remove_AorB #remove_a").addEventListener("click", clickRemoveA);
+        document.querySelector("#remove_AorB #remove_b").addEventListener("click", clickRemoveB);
+        /* Vis navne på knapper (A og B) */
+        document.querySelector("#remove_AorB [data-field=prefectA]").textContent = prefectA.firstName;
+        document.querySelector("#remove_AorB [data-field=prefectB]").textContent = prefectB.firstName;
+
+        /* close dialog */
+        function closeDialog() {
+          document.querySelector("#remove_AorB").classList.add("hide");
+          document.querySelector("#remove_AorB .closebtn").removeEventListener("click", closeDialog);
+          document.querySelector("#remove_AorB #remove_a").removeEventListener("click", clickRemoveA);
+          document.querySelector("#remove_AorB #remove_b").removeEventListener("click", clickRemoveB);
+        }
+
+        /* if remove A */
+        function clickRemoveA() {
+          removeFirstPrefect(prefectA);
+          makePrefect(selectedPrefect);
+          buildList();
+          closeDialog();
+        }
+
+        /* if remove B */
+        function clickRemoveB() {
+          removeFirstPrefect(prefectB);
+          makePrefect(selectedPrefect);
+          buildList();
+          closeDialog();
+        }
+      }
+
+      function removeWinner(prefectStudent) {
+        prefectStudent.prefect = false;
+      }
+
+      function makePrefect(student) {
+        student.prefect = true;
       }
     }
     // Listen for click on close button
     document.querySelector(".closebtn").addEventListener("click", closePopup);
+    console.log("closebtn", document.querySelector(".closebtn").addEventListener("click", closePopup));
+
+    /* luk popup */
+    function closePopup() {
+      let closePopup = document.querySelector("#popupContainer");
+      closePopup.classList.add("hidden");
+      closePopup.style.display = "none";
+      // document.querySelector("#prefectText").textContent;
+    }
   }
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
 }
 
-/* luk popup */
-function closePopup() {
-  let closePopup = document.querySelector("#popupContainer");
-  closePopup.classList.add("hide");
-  closePopup.style.display = "none";
-  // document.querySelector("#prefectText").textContent;
-}
-
 // DROPDOWN
 function toggleDropDown(evt) {
   console.log("klik drop");
-  document.querySelector("#dropDown").classList.toggle("hide");
+  document.querySelector("#dropDown").classList.toggle("hidden");
 }
 
 // FILTER HOUSE FUNCTIONS

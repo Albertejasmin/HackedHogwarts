@@ -66,6 +66,37 @@
         </tbody>
       </table>
 
+      <!-- DIALOG 1 -PREFECT -->
+      <div id="remove_other" class="modal hide">
+        <div class="dialog">
+          <h1>Warning:</h1>
+          <button class="closebtn">X</button>
+          <p>
+            There can be only one prefect of each type at a time.
+            <br />
+            Do you want to remove the other prefect?
+          </p>
+          <button id="remove_other_btn">Remove <span data-field="otherPrefect">other prefect</span></button>
+        </div>
+      </div>
+
+      <!-- DIALOG 2  -->
+      <div id="remove_AorB" class="modal hide">
+        <div class="dialog">
+          <h1>Warning:</h1>
+          <button class="closebtn">X</button>
+          <p>
+            There can not be any more than 2 winners at a time.
+            <br />
+            Do you wish to remove one of the exisitng winners?
+          </p>
+          <div class="sideBYside">
+            <button id="remove_a">remove <span data-field="prefectA">A</span></button>
+            <button id="remove_b">remove <span data-field="prefectB">B</span></button>
+          </div>
+        </div>
+      </div>
+
       <template id="student">
         <tr>
           <td data-field="image"><img src="{{Student.image.src}}" alt="" /></td>
@@ -74,7 +105,7 @@
           <td data-field="middlename"></td>
           <td data-field="nickname"></td>
           <td data-field="lastname"></td>
-          <td data-field="prefect"></td>
+          <td data-field="prefect" data-prefect="false"></td>
           <td data-field="house"></td>
         </tr>
       </template>

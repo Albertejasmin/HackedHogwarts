@@ -234,5 +234,45 @@ button:hover {
 }
 
 .hide {
+  visibility: hidden;
+}
+.hidden {
   display: none;
+}
+
+/* DIALOPG BOX */
+.modal {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-size: 200%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(42, 35, 24, 0.901);
+}
+.dialog {
+  background: rgb(255, 255, 255);
+  padding: 2rem;
+  width: 300px;
+  position: fixed;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23618/rip.svg) bottom;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+.closebtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2em;
+  height: 2em;
+  z-index: 1;
+  margin: 1em;
+}
+
+button {
+  background-color: rgb(201, 201, 201);
 }
