@@ -61,7 +61,7 @@ function addButtons() {
   //document.querySelector("#list tbody").addEventListener("click", clickStudent);
 
   /* Click search */
-  /* document.querySelector("#searchBtn").addEventListener("click", search); */
+  document.querySelector("#search").addEventListener("input", search);
 }
 
 /* SEARCH */
@@ -312,6 +312,33 @@ function buildList() {
   document.querySelector("h3").textContent = `The list has ${sortedList.length} students`;
 }
 
+/* search */
+function search(evt) {
+  const input = evt.target.value;
+
+  const searchStudents = sortedList.filter((student) => {
+    const fullStudentName = `${student.firstName} ${student.middleName} ${student.nickName} ${student.lastName}`;
+
+    if (fullStudentName.toLowerCase().includes(input.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  displayList(searchStudents);
+
+  document.querySelector("h3").textContent = `The list has ${searchStudents.length} students`;
+
+  if (searchStudents.length === 1) {
+    document.querySelector("h3").textContent = `The list has 1 student`;
+  }
+
+  if (searchStudents.length === 0) {
+    document.querySelector("h3").textContent = `No match`;
+  }
+}
+
 // Capitalize function
 function capitalize(str) {
   const capStr = str.toUpperCase();
@@ -377,5 +404,3 @@ function sortList(sortedList) {
 }
 
 /* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
-
-/* search */
