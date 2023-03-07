@@ -25,10 +25,10 @@ const Student = {
   nickName: "",
   image: "",
   house: "",
-  prefect: "",
+  prefect: false,
   bloodtype: "",
-  inqusitorial: "",
-  expelled: "",
+  inqusitorial: false,
+  expelled: false,
 };
 
 function start() {
@@ -56,29 +56,7 @@ function addButtons() {
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
-
-  /* CLICK STUDENT - POPUP */
-  //document.querySelector("#list tbody").addEventListener("click", clickStudent);
-
-  /* Click search */
-  /* document.querySelector("#searchBtn").addEventListener("click", search); */
 }
-
-/* SEARCH */
-/* function search() {
-  let input = document.querySelector("#search");
-  let filterSearch = filteredList;
-  let ul = document.querySelector("#search_results");
-  let li = ul.querySelectorAll("li");
-  for (let i = 0; i < li.length; i++) {
-    let text = li[i].textContent.toUpperCase();
-    if (text.indexOf(filterSearch) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-} */
 
 // Load json
 function loadJSON() {
@@ -153,7 +131,7 @@ function prepareObjects(jsonData) {
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
-
+    student.prefect = false;
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
@@ -173,6 +151,7 @@ function displayList(students) {
 }
 
 function displayStudent(student) {
+  // console.log(student);
   // create clone
   const clone = document.querySelector("template#student").content.cloneNode(true);
   // set clone data
@@ -204,16 +183,18 @@ function displayStudent(student) {
     let middleNamePop = student.middleName;
     let lastNamePop = student.lastName;
     let nickNamePop = student.nickName;
+
     // let imagePop = student.image;
 
     // Update the HTML with the first name
     // let getImg = document.querySelector("#studentInfo img");
-    let htmlPTags = document.querySelectorAll(".studentName p");
-    htmlPTags[0].textContent = "Firstname: " + firstNamePop;
-    htmlPTags[1].textContent = "Middlename: " + middleNamePop;
-    htmlPTags[2].textContent = "Lastname: " + lastNamePop;
-    htmlPTags[3].textContent = "Nickname: " + nickNamePop;
-    // getImg = setAttribute("src", imagePop);
+    let namePop = document.querySelectorAll(".studentName p");
+    let statusPop = document.querySelector("#prefectText");
+    namePop[0].textContent = "Firstname: " + firstNamePop;
+    namePop[1].textContent = "Middlename: " + middleNamePop;
+    namePop[2].textContent = "Lastname: " + lastNamePop;
+    namePop[3].textContent = "Nickname: " + nickNamePop;
+    document.querySelector("#image img").src = student.image.src;
 
     // change background based on house
     if (student.house === "Gryffindor") {
@@ -226,6 +207,37 @@ function displayStudent(student) {
       document.querySelector("#popupContainer").style.backgroundColor = "#0e1a40";
     } else {
       document.querySelector("#popupContainer").style.backgroundColor = "white";
+    }
+
+    // PREFECT
+    // console.log("clone", clone);
+    console.log("student.prefect", student.prefect);
+    console.log("********************************");
+
+    // click prefect
+    document.querySelector("#prefectBtn").addEventListener("click", makePrefect);
+    console.log("clicked prefect");
+    if (student.prefect === true) {
+      document.querySelector("#prefectText").textContent = "Prefect: Yes";
+    } else {
+      document.querySelector("#prefectText").textContent = "Prefect: No";
+    }
+    // Tilføj prefect function
+    console.log("student", student);
+    function makePrefect() {
+      if (student.prefect === true) {
+        student.prefect = false;
+      } else {
+        student.prefect = true;
+      }
+      if (student.prefect === true) {
+        document.querySelector("#prefectText").textContent = "Prefect: Yes";
+      } else {
+        document.querySelector("#prefectText").textContent = "Prefect: No";
+      }
+      //console.log("student.prefect", student.prefect)
+
+      buildList();
     }
 
     // Listen for click on close button
@@ -241,6 +253,7 @@ function closePopup() {
   let closePopup = document.querySelector("#popupContainer");
   closePopup.classList.add("hide");
   closePopup.style.display = "none";
+  // document.querySelector("#prefectText").textContent;
 }
 
 // DROPDOWN
