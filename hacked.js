@@ -54,7 +54,6 @@ function addButtons() {
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
-
 }
 
 // Load json
@@ -130,7 +129,7 @@ function prepareObjects(jsonData) {
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
-  
+
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
@@ -207,20 +206,18 @@ function displayStudent(student) {
       document.querySelector("#popupContainer").style.backgroundColor = "white";
     }
 
-    
     // PREFECT TEXT
- if (student.prefect === true) {
+    if (student.prefect === true) {
       document.querySelector("#prefectText").textContent = "Prefect: Yes";
     } else {
       document.querySelector("#prefectText").textContent = "Prefect: No";
     }
 
- // click prefect
+    // click prefect
     document.querySelector("#prefectBtn").addEventListener("click", makePrefect);
     console.log("clicked prefect");
-   
 
-  // TILFØJER PREFECT
+    // TILFØJER PREFECT
     function makePrefect() {
       if (student.prefect === true) {
         student.prefect = false;
@@ -237,8 +234,6 @@ function displayStudent(student) {
       } else {
         document.querySelector("#prefectText").textContent = "Prefect: No";
       }
-
-    
     }
 
     //TRY MAKE PREFECT
@@ -262,15 +257,14 @@ function displayStudent(student) {
       } else if (numberOfPrefects >= 2) {
         console.log("der kan kun være 2 prefects, vil du fjerne en?");
       } else {
-      makePrefect(selectedPrefect);
+        makePrefect(selectedPrefect);
         // student.prefect = true;
         console.log("laver prefect");
       }
-    } 
+    }
     // Listen for click on close button
     document.querySelector(".closebtn").addEventListener("click", closePopup);
-
-  }/* her lukker popup */
+  } /* her lukker popup */
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
