@@ -281,3 +281,7 @@ button:hover {
 button {
   background-color: rgb(201, 201, 201);
 }
+
+td[data-field="expelled"] {
+  color: royalblue;
+}

@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", start);
 // Global array
 const allStudents = [];
 
-let expelledStudents = [];
+let allExpelledStudents = [];
 
 // variabler
 
@@ -159,11 +159,16 @@ function displayStudent(student) {
   clone.querySelector("[data-field=fullname]").textContent = student.firstName + " " + student.lastName;
   clone.querySelector("[data-field=firstname]").textContent = student.firstName;
   clone.querySelector("[data-field=prefect]").textContent = student.prefect;
+  clone.querySelector("[data-field=expelled]").textContent = student.expelled;
   clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
+
   // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
   clone.querySelector("[data-field=image] img").src = student.image.src;
   clone.querySelector("[data-field=house]").textContent = student.house;
+
+  /* CLICK EXPELLED*/
+  clone.querySelector("[data-field=expelled]").addEventListener("click", expelStudent);
 
   /* CLICK STUDENT POPUP */
   clone.querySelector("#student_info").addEventListener("click", showPopup);
@@ -246,6 +251,27 @@ function displayStudent(student) {
 
   function makeNewPrefect(student) {
     student.prefect = true;
+  }
+
+  /* EXPELLED */
+  //Must be able to expel individual students, and see a list of expelled students.
+
+  if (student.expelled) {
+    document.querySelector("#expelledText").textContent = "prefect: Yes";
+    clone.querySelector("[data-field=prefect]").textContent = "Yes";
+  } else {
+    document.querySelector("#expelledText").textContent = "prefect: No";
+    clone.querySelector("[data-field=expelled]").textContent = "No";
+  }
+
+  function expelStudent(studentSelected) {
+    // filterer på alle studerende der expelled
+    const expelledStudent = allExpelledStudents.filter((student) => student.expelled);
+    console.log(expelledStudent);
+
+    // kigger efter studetents der er expelled og sammeligner med hus
+    const otherExp = expelledStudent.filter((student) => student.house === studentSelected.house);
+    console.log(otherExp);
   }
 
   /* POPUP STUDENT */
@@ -469,5 +495,3 @@ function sortList(sortedList) {
   // husk at return listen
   return sortedList;
 }
-
-/* clone jsondata firstname, middlename, nickname og lastname og img på den enkelte student */
