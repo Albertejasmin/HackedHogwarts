@@ -182,20 +182,24 @@ function displayStudent(student) {
       // console.log("nu skal vi lave prefect");
       tryMakePrefect(student);
     }
+
     buildList();
   }
   // TRY MAKE PREFECT
-  function tryMakePrefect(student) {
+  function tryMakePrefect(selectedPrefect) {
     // filterer på alle studerende der prefects
     const prefects = allStudents.filter((student) => student.prefect);
     console.log(prefects);
-    const others = prefects.filter((student) => student.house === student.house);
+    const others = prefects.filter((student) => student.house === selectedPrefect.house);
+    console.log(others);
+
     if (others.length > 1) {
       removeOthers(others);
     } else {
-      isPrefect(student);
+      isPrefect(selectedPrefect);
     }
-    isPrefect(student);
+    isPrefect(selectedPrefect);
+
     function isPrefect(student) {
       student.prefect = true;
     }
@@ -203,12 +207,48 @@ function displayStudent(student) {
     function removeOthers(others) {
       // sprøg om user vil ignore eller fjerne studerende
       document.querySelector("#remove_AorB").classList.remove("hide");
+      document.querySelector("#remove_AorB .closebtn_dialog").addEventListener("click", closeDialog);
+      document.querySelector("#remove_AorB #remove_a").addEventListener("click", () => clickRemoveA(others[0], selectedPrefect));
+      document.querySelector("#remove_AorB #remove_b").addEventListener("click", () => clickRemoveB(others[1], selectedPrefect));
+
+      //vis navne på knapper
+      document.querySelector("#remove_a [data-field=prefectA]").textContent = others[0].firstName;
+      document.querySelector("#remove_b [data-field=prefectB]").textContent = others[1].firstName;
     }
+  }
+
+  function closeDialog() {
+    document.querySelector("#remove_AorB").classList.add("hide");
+    document.querySelector("#remove_AorB .closebtn_dialog").removeEventListener("click", closeDialog);
+    document.querySelector("#remove_AorB #remove_a").removeEventListener("click", clickRemoveA);
+    document.querySelector("#remove_AorB #remove_b").removeEventListener("click", clickRemoveB);
+  }
+
+  function clickRemoveA(studentA, selectedPrefect) {
+    removePrefect(studentA);
+    makeNewPrefect(selectedPrefect);
+    buildList();
+    closeDialog();
+  }
+
+  function clickRemoveB(studentB, selectedPrefect) {
+    removePrefect(studentB);
+    makeNewPrefect(selectedPrefect);
+    buildList();
+    closeDialog();
+  }
+
+  function removePrefect(others) {
+    others.prefect = false;
+  }
+
+  function makeNewPrefect(student) {
+    student.prefect = true;
   }
 
   /* POPUP STUDENT */
   /* vis popup  */
-  function showPopup() {
+  function showPopup(others) {
     let popup = document.querySelector("#popupContainer");
     popup.classList.add("show");
     popup.style.display = "block";
@@ -247,12 +287,6 @@ function displayStudent(student) {
     } else {
       document.querySelector("#popupContainer").style.backgroundColor = "white";
     }
-
-    // CLICK prefect
-
-    // TILFØJER PREFECT
-
-    // TRY MAKE PREFECT
 
     // Listen for click on close button
     document.querySelector(".closebtn").addEventListener("click", closePopup);

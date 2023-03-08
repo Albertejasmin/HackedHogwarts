@@ -38,3 +38,7 @@ SPØRGSMÅL TIL TUTOR:
 - html --> vores th, thred, er de nødvendige???
 - 
 
+ALBERTE LAVER LISTE OVER HVAD VI MANGLER: 
+- bloodtypes loades ind (med fetch)
+- bloodtypes vises på forside (med svg)
+- 

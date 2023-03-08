@@ -268,7 +268,7 @@ button:hover {
   text-align: center;
   padding-bottom: 3rem;
 }
-.closebtn {
+.closebtn_dialog {
   position: absolute;
   right: 0;
   top: 0;
