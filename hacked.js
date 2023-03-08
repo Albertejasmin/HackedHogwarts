@@ -29,7 +29,7 @@ const Student = {
   house: "",
   prefect: false,
   bloodtype: "",
-  inqusitorial: false,
+  inquisitorial: false,
   expelled: false,
 };
 
@@ -159,11 +159,15 @@ function displayStudent(student) {
   clone.querySelector("[data-field=fullname]").textContent = student.firstName + " " + student.lastName;
   clone.querySelector("[data-field=firstname]").textContent = student.firstName;
   clone.querySelector("[data-field=prefect]").textContent = student.prefect;
-  clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
+  clone.querySelector("[data-field=inquisitorial]").textContent = student.inquisitorial;
   // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
   clone.querySelector("[data-field=image] img").src = student.image.src;
   clone.querySelector("[data-field=house]").textContent = student.house;
+
+  /* EVENTLISTENER PREFECT & INQUISITORIAL */
+  clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
+  clone.querySelector("[data-field=inquisitorial]").addEventListener("click", makeInquisitorial);
 
   /* CLICK STUDENT POPUP */
   clone.querySelector("#student_info").addEventListener("click", showPopup);
@@ -182,9 +186,9 @@ function displayStudent(student) {
       // console.log("nu skal vi lave prefect");
       tryMakePrefect(student);
     }
-
     buildList();
   }
+
   // TRY MAKE PREFECT
   function tryMakePrefect(selectedPrefect) {
     // filterer på alle studerende der prefects
@@ -244,6 +248,38 @@ function displayStudent(student) {
 
   function makeNewPrefect(student) {
     student.prefect = true;
+  }
+
+  /* INQUISITORIAL */
+  if (student.inquisitorial) {
+    clone.querySelector("[data-field=inquisitorial]").textContent = "Yes";
+  } else {
+    clone.querySelector("[data-field=inquisitorial]").textContent = "No";
+  }
+
+  function makeInquisitorial() {
+    if (student.inquisitorial) {
+      student.inquisitorial = false;
+    } else {
+      // console.log("nu skal vi lave prefect");
+      tryMakeInquisitorial(student);
+    }
+    buildList();
+  }
+
+  // TRY MAKE INQUISITORIAL
+  function tryMakeInquisitorial(selectedInquisitor) {
+    // filterer på alle studerende der inquistitors
+    const inquisitorials = allStudents.filter((student) => student.inquisitorials);
+    console.log(inquisitorials);
+    const otherInq = inquisitorials.filter((student) => student.house === selectedInquisitor.house);
+    console.log(otherInq);
+
+    if (otherInq.length > 1) {
+      console.log("der kan kun være en inq ad gangen");
+    } else {
+      console.log("lav inq");
+    }
   }
 
   /* POPUP STUDENT */
