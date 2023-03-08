@@ -359,8 +359,6 @@ function setFilter(filter) {
   // sets the global variable
   settings.filterBy = filter;
   buildList();
-  expelledList();
-  console.log("buildlist kaldes");
 }
 
 function filterList(filteredList) {
@@ -451,6 +449,7 @@ function capitalize(str) {
 // SORTING
 /*BYG LISTE AF EXPELLED STUDENTS -SORTING*/
 function expelledList() {
+  console.log("explled button cliked");
   /* laver en ny liste med de expelled students*/
   const expelList = allExpelledStudents;
   console.log(expelList);
@@ -485,6 +484,7 @@ function setSort(sortBy, sortDir) {
   settings.sortBy = sortBy;
   settings.sortDir = sortDir;
   buildList();
+  expelledList();
 }
 
 function sortList(sortedList) {
