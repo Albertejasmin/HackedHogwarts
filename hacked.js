@@ -5,6 +5,8 @@ window.addEventListener("DOMContentLoaded", start);
 // Global array
 const allStudents = [];
 
+let expelledStudents = [];
+
 // variabler
 
 const settings = {
@@ -54,7 +56,6 @@ function addButtons() {
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
-
 }
 
 // Load json
@@ -70,6 +71,7 @@ function loadJSON() {
 
 // Creating new array with cleaned Student data
 function prepareObjects(jsonData) {
+  // console.log(jsonData);
   jsonData.forEach((jsonObject) => {
     // TODO: Create new object with cleaned data - and store that in the allAnimals array
     const student = Object.create(Student);
@@ -130,7 +132,7 @@ function prepareObjects(jsonData) {
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
-  
+
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
@@ -156,7 +158,8 @@ function displayStudent(student) {
   // set clone data
   clone.querySelector("[data-field=fullname]").textContent = student.firstName + " " + student.lastName;
   clone.querySelector("[data-field=firstname]").textContent = student.firstName;
-  // clone.querySelector("[data-field=middlename]").textContent = student.middleName;
+  clone.querySelector("[data-field=prefect]").textContent = student.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
   // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
   clone.querySelector("[data-field=image] img").src = student.image.src;
@@ -164,6 +167,43 @@ function displayStudent(student) {
 
   /* CLICK STUDENT POPUP */
   clone.querySelector("tr").addEventListener("click", showPopup);
+
+  // PREFECT
+  if (student.prefect) {
+    clone.querySelector("[data-field=prefect]").textContent = "Yes";
+  } else {
+    clone.querySelector("[data-field=prefect]").textContent = "No";
+  }
+
+  function makePrefect() {
+    if (student.prefect) {
+      student.prefect = false;
+    } else {
+      // console.log("nu skal vi lave prefect");
+      tryMakePrefect(student);
+    }
+    buildList();
+  }
+  // TRY MAKE PREFECT
+  function tryMakePrefect(student) {
+    // filterer på alle studerende der prefects
+    const prefects = allStudents.filter((student) => student.prefect);
+    console.log(prefects);
+    const others = prefects.filter((student) => student.house === student.house);
+    if (others.length > 1) {
+      removeOthers(others);
+    } else {
+      isPrefect(student);
+    }
+    isPrefect(student);
+    function isPrefect(student) {
+      student.prefect = true;
+    }
+
+    function removeOthers(others) {
+      // sprøg om user vil ignore eller fjerne studerende
+    }
+  }
 
   /* POPUP STUDENT */
   /* vis popup  */
@@ -207,58 +247,12 @@ function displayStudent(student) {
       document.querySelector("#popupContainer").style.backgroundColor = "white";
     }
 
-    // PREFECT
-    // click prefect
-    document.querySelector("#prefectBtn").addEventListener("click", makePrefect);
-    console.log("clicked prefect");
-    if (student.prefect === true) {
-      document.querySelector("#prefectText").textContent = "Prefect: Yes";
-    } else {
-      document.querySelector("#prefectText").textContent = "Prefect: No";
-    }
+    // CLICK prefect
 
     // TILFØJER PREFECT
-    function makePrefect() {
-      if (student.prefect === true) {
-        student.prefect = false;
-      } else if (student.prefect === false) {
-        tryMakePrefect(student);
-      }
 
-      if (student.prefect === true) {
-        document.querySelector("#prefectText").textContent = "Prefect: Yes";
-      } else {
-        document.querySelector("#prefectText").textContent = "Prefect: No";
-      }
-      //console.log("student.prefect", student.prefect)
-      // PREFECT
-      function tryMakePrefect(selectedPrefect) {
-        // liste af alle prefects
-        console.log(selectedPrefect.lastName);
-        const prefects = allStudents.filter((student) => student.prefect === true);
-        prefects.push(selectedPrefect);
-        console.log("allStudents", allStudents);
-        console.log("prefects", prefects);
-        // for at få antallet af prefects
-        const numberOfPrefects = prefects.length;
-        console.log("tryMakePrefect numberOfPrefects", numberOfPrefects);
-        // finder gamle prefects
-        const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.prefect).shift();
-        // const firstPrefect = prefects.filter((student) => student.prefect === selectedPrefect.house).shift();
-        console.log("firstPrefect", firstPrefect);
-        if (firstPrefect !== undefined) {
-          console.log("kan kun være en vinder fra hvert hus");
-        } else if (numberOfPrefects >= 2) {
-          console.log("der kan kun være 2 vindere, vil du fjerne en?");
-        } else {
-          //    makePrefect(selectedPrefect);
-          console.log("ELSE ELSE");
-          student.prefect = true;
-          console.log("laver vinder");
-        }
-        buildList();
-      }
-    }
+    // TRY MAKE PREFECT
+
     // Listen for click on close button
     document.querySelector(".closebtn").addEventListener("click", closePopup);
   }
@@ -338,6 +332,7 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
   // kalder displayList med vores sortedList
+
   displayList(sortedList);
   // console.log("displayList kaldes", allStudents);
   // console.log("displayList kaldes", currentList);
