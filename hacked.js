@@ -39,7 +39,7 @@ function start() {
   addButtons();
 
   // tilføjer eventlistners til knapperne
-  // document.querySelector("#expelledButton").addEventListener("click", showExpelledStudents);
+
   // document.querySelector("#squadedButton").addEventListener("click", showSquadedStudents);
 }
 
@@ -56,6 +56,9 @@ function addButtons() {
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
+
+  //Click expelled sorting
+  document.querySelector("#expelledButton").addEventListener("click", expelledList());
 }
 
 // Load json
@@ -258,30 +261,26 @@ function displayStudent(student) {
 
   if (student.expelled) {
     document.querySelector("#expelledText").textContent = "prefect: Yes";
-    clone.querySelector("[data-field=prefect]").textContent = "Yes";
   } else {
+    clone.querySelector("[data-field=expelled]").textContent = "Expell";
     document.querySelector("#expelledText").textContent = "prefect: No";
-    clone.querySelector("[data-field=expelled]").textContent = "No";
   }
 
-  function expelStudent(studentSelected) {
-    // filterer på alle studerende der expelled
-    const expelledStudent = allStudents.filter((student) => student.expelled);
-    console.log(expelledStudent);
+  function expelStudent() {
+    student.expelled = true;
 
-    // for at få antallet af prefects
-    const numberOfExpelled = expelledStudent.length;
-    console.log("numberOfPrefects", numberOfExpelled);
+    const studentID = allStudents.indexOf(student);
 
-    if (numberOfExpelled.length > 1) {
-      console.log("gør expelled");
-      isExpelled(selectedPrefect);
-    }
-    isExpelled(studentSelected);
+    const newExpelledStudent = allStudents.splice(studentID, 1);
 
-    function isExpelled(student) {
-      student.expelled = true;
-    }
+    /* shift gør at den klikkede student bliver taget ud af det gamle array allStudents */
+    const moveExpelledStudent = newExpelledStudent.shift();
+
+    /* push gør at den klikkede student bliver fjernet fra listen ud i den nye liste allExpelledStudents*/
+    allExpelledStudents.push(moveExpelledStudent);
+    console.log(allExpelledStudents);
+
+    buildList();
   }
 
   /* POPUP STUDENT */
@@ -360,6 +359,7 @@ function setFilter(filter) {
   // sets the global variable
   settings.filterBy = filter;
   buildList();
+  expelledList();
   console.log("buildlist kaldes");
 }
 
@@ -449,6 +449,13 @@ function capitalize(str) {
 }
 
 // SORTING
+/*BYG LISTE AF EXPELLED STUDENTS -SORTING*/
+function expelledList() {
+  /* laver en ny liste med de expelled students*/
+  const expelList = allExpelledStudents;
+  console.log(expelList);
+}
+
 function selectSort(event) {
   console.log("selectSort", event);
   const sortBy = event.target.dataset.sort;
