@@ -269,9 +269,19 @@ function displayStudent(student) {
     const expelledStudent = allExpelledStudents.filter((student) => student.expelled);
     console.log(expelledStudent);
 
-    // kigger efter studetents der er expelled og sammeligner med hus
-    const otherExp = expelledStudent.filter((student) => student.house === studentSelected.house);
-    console.log(otherExp);
+    // for at få antallet af prefects
+    const numberOfExpelled = expelled.length;
+    console.log("numberOfPrefects", numberOfExpelled);
+
+    if (numberOfExpelled.length > 1) {
+      console.log("gør expelled");
+      isExpelled(selectedPrefect);
+    }
+    isExpelled(studentSelected);
+
+    function isExpelled(student) {
+      student.expelled = true;
+    }
   }
 
   /* POPUP STUDENT */
