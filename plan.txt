@@ -39,6 +39,7 @@ SPØRGSMÅL TIL TUTOR:
 - 
 
 ALBERTE LAVER LISTE OVER HVAD VI MANGLER: 
+- vis prefect text på popup 
 - bloodtypes loades ind (med fetch)
 - bloodtypes vises på forside (med svg)
 - 
