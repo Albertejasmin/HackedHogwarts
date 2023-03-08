@@ -166,7 +166,7 @@ function displayStudent(student) {
   clone.querySelector("[data-field=house]").textContent = student.house;
 
   /* CLICK STUDENT POPUP */
-  clone.querySelector("[data-field=image]").addEventListener("click", showPopup);
+  clone.querySelector("#student_info").addEventListener("click", showPopup);
 
   // PREFECT
   if (student.prefect) {
