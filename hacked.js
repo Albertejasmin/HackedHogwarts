@@ -266,11 +266,11 @@ function displayStudent(student) {
 
   function expelStudent(studentSelected) {
     // filterer på alle studerende der expelled
-    const expelledStudent = allExpelledStudents.filter((student) => student.expelled);
+    const expelledStudent = allStudents.filter((student) => student.expelled);
     console.log(expelledStudent);
 
     // for at få antallet af prefects
-    const numberOfExpelled = expelled.length;
+    const numberOfExpelled = expelledStudent.length;
     console.log("numberOfPrefects", numberOfExpelled);
 
     if (numberOfExpelled.length > 1) {
