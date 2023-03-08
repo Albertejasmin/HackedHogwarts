@@ -56,9 +56,6 @@ function addButtons() {
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
-
-  //Click expelled sorting
-  document.querySelector("#expelledButton").addEventListener("click", expelledList());
 }
 
 // Load json
@@ -170,7 +167,7 @@ function displayStudent(student) {
   clone.querySelector("[data-field=image] img").src = student.image.src;
   clone.querySelector("[data-field=house]").textContent = student.house;
 
-  /* CLICK EXPELLED*/
+  /* CLICK EXPELLED SORT*/
   clone.querySelector("[data-field=expelled]").addEventListener("click", expelStudent);
 
   /* CLICK STUDENT POPUP */
@@ -260,6 +257,7 @@ function displayStudent(student) {
   //Must be able to expel individual students, and see a list of expelled students.
 
   if (student.expelled) {
+    clone.querySelector("[data-field=expelled]").textContent = "Expelled";
     document.querySelector("#expelledText").textContent = "prefect: Yes";
   } else {
     clone.querySelector("[data-field=expelled]").textContent = "Expell";
@@ -440,6 +438,21 @@ function buildList() {
   }
 }
 
+//Click expelled sorting
+document.querySelector("#expelledButton").addEventListener("click", expelledList());
+
+/*BYG LISTE AF EXPELLED STUDENTS -SORTING*/
+function expelledList() {
+  console.log("explled button cliked");
+  /* laver en ny liste med de expelled students*/
+  const expelList = filterList(allExpelledStudents);
+  console.log(expelList);
+  const sortExpelled = sortList(expelList);
+  displayList(sortExpelled);
+  console.log("expelled list");
+  document.querySelector("h3").textContent = `The list has ${expelList.length} students`;
+}
+
 // Capitalize function
 function capitalize(str) {
   const capStr = str.toUpperCase();
@@ -447,14 +460,6 @@ function capitalize(str) {
 }
 
 // SORTING
-/*BYG LISTE AF EXPELLED STUDENTS -SORTING*/
-function expelledList() {
-  console.log("explled button cliked");
-  /* laver en ny liste med de expelled students*/
-  const expelList = allExpelledStudents;
-  console.log(expelList);
-}
-
 function selectSort(event) {
   console.log("selectSort", event);
   const sortBy = event.target.dataset.sort;
