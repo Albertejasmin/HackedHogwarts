@@ -170,8 +170,10 @@ function displayStudent(student) {
 
   // PREFECT
   if (student.prefect) {
+    document.querySelector("#prefectText").textContent = "prefect: Yes";
     clone.querySelector("[data-field=prefect]").textContent = "Yes";
   } else {
+    document.querySelector("#prefectText").textContent = "prefect: No";
     clone.querySelector("[data-field=prefect]").textContent = "No";
   }
 
@@ -248,7 +250,7 @@ function displayStudent(student) {
 
   /* POPUP STUDENT */
   /* vis popup  */
-  function showPopup(others) {
+  function showPopup() {
     let popup = document.querySelector("#popupContainer");
     popup.classList.add("show");
     popup.style.display = "block";
