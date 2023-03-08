@@ -166,7 +166,7 @@ function displayStudent(student) {
   clone.querySelector("[data-field=house]").textContent = student.house;
 
   /* CLICK STUDENT POPUP */
-  clone.querySelector("tr").addEventListener("click", showPopup);
+  clone.querySelector("[data-field=image]").addEventListener("click", showPopup);
 
   // PREFECT
   if (student.prefect) {
@@ -202,6 +202,7 @@ function displayStudent(student) {
 
     function removeOthers(others) {
       // sprøg om user vil ignore eller fjerne studerende
+      document.querySelector("#remove_AorB").classList.remove("hide");
     }
   }
 

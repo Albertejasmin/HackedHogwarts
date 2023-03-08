@@ -235,6 +235,7 @@ button:hover {
 
 .hide {
   display: none;
+  visibility: hidden;
 }
 
 /* DIALOPG BOX */
