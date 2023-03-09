@@ -26,7 +26,7 @@ const Student = {
   image: "",
   house: "",
   prefect: "",
-  bloodtype: "",
+  blood: "",
   inqusitorial: "",
   expelled: "",
 };
@@ -154,12 +154,24 @@ function prepareObjects(studentData, bloodData) {
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
+    let blood;
+    // FIND BLOOD STATUS
+    if (lastName === "") {
+      blood = "unknown";
+    } else if (bloodData.half.includes(lastName)) {
+      blood = "half";
+    } else if (bloodData.pure.includes(lastName)) {
+      blood = "pure";
+    } else {
+      blood = "muggle";
+    }
 
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
   // displayList();
   buildList();
+  console.log(Student.bloodData);
 
   /* CLICK STUDENT - POPUP */
 }
