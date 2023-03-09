@@ -25,7 +25,7 @@
 
       <section id="sort_buttons">
         <div id="dropDownContainer">
-          <button id="hasDropDown">
+          <button id="nameDropDown">
             <span>SORT BY NAME ↓</span>
           </button>
           <div id="dropDown" class="hide">
@@ -35,7 +35,16 @@
         </div>
         <button data-action="sort" data-sort="prefect">PREFECT STUDENTS</button>
         <button id="expelledButton" data-action="sort" data-sort="expelled">EXPELLED STUDENTS</button>
-        <button data-action="sort" data-sort="bloodtype">BLOODTYPE</button>
+        <div id="dropDownContainer">
+          <button id="bloodtypeDropDown">
+            <span>BLOODTYPE ↓</span>
+          </button>
+          <div id="dropDown" class="hide">
+            <p data-action="sort" data-sort="P">Pureblood</p>
+            <p data-action="sort" data-sort="H">Halfblood</p>
+            <p data-action="sort" data-sort="M">Muggle</p>
+          </div>
+        </div>
       </section>
     </section>
 
