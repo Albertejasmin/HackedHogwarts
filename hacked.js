@@ -78,12 +78,14 @@ async function loadJSON() {
   // when loaded, prepare objects
   prepareObjects(studentData, bloodData);
 }
-console.log("prepare", prepareObjects());
+//console.log("prepare", prepareObjects());
 
 // Creating new array with cleaned Student data
 function prepareObjects(studentData, bloodData) {
+  console.log("all s", allStudents);
+  console.log("bloodData", bloodData);
   // console.log(jsonData);
-  jsonData.forEach((jsonObject) => {
+  studentData.forEach((jsonObject) => {
     // TODO: Create new object with cleaned data - and store that in the allAnimals array
     const student = Object.create(Student);
 
@@ -144,6 +146,25 @@ function prepareObjects(studentData, bloodData) {
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
 
+    let blood;
+
+    // FIND BLOOD STATUS
+
+    const isHalfBlood = bloodData.half.includes(student.lastName);
+    const isPureBlood = bloodData.pure.includes(student.lastName);
+    // console.log("half pur", isHalfBlood, isPureBlood);
+
+    if (isHalfBlood && isPureBlood) {
+      student.blood = "H";
+    } else if (isHalfBlood) {
+      student.blood = "H";
+    } else if (isPureBlood) {
+      student.blood = "P";
+    } else {
+      student.blood = "M";
+    }
+    console.log(student.lastName + " " + student.blood);
+
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
   });
@@ -172,11 +193,17 @@ function displayStudent(student) {
   clone.querySelector("[data-field=prefect]").textContent = student.prefect;
   clone.querySelector("[data-field=expelled]").textContent = student.expelled;
   clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
-
-  // clone.querySelector("[data-field=lastname]").textContent = student.lastName;
-  // clone.querySelector("[data-field=nickname]").textContent = student.nickName;
   clone.querySelector("[data-field=image] img").src = student.image.src;
   clone.querySelector("[data-field=house]").textContent = student.house;
+
+  // TILFØJER BLOOD TYPE SVG'er
+  if (student.blood === "P") {
+    clone.querySelector("[data-field=blood] img").src = "SVG/pureblood.svg";
+  } else if (student.blood === "H") {
+    clone.querySelector("[data-field=blood] img").src = "SVG/halfblood.svg";
+  } else {
+    clone.querySelector("[data-field=blood] img").src = "SVG/muggle.svg";
+  }
 
   /* CLICK EXPELLED SORT*/
   clone.querySelector("[data-field=expelled]").addEventListener("click", expelStudent);
@@ -320,6 +347,16 @@ function displayStudent(student) {
     namePop[2].textContent = "Lastname: " + lastNamePop;
     namePop[3].textContent = "Nickname: " + nickNamePop;
     document.querySelector("#image img").src = student.image.src;
+    document.querySelector(".houseNamePop").textContent = student.house;
+
+    // BLOODTYPE TEXT PÅ POPUP
+    if (student.blood === "H") {
+      document.querySelector("#bloodText").textContent = "Bloodtype: Half";
+    } else if (student.blood === "P") {
+      document.querySelector("#bloodText").textContent = "Bloodtype: Pure";
+    } else {
+      document.querySelector("#bloodText").textContent = "Bloodtype: Muggle";
+    }
 
     // change background based on house
     if (student.house === "Gryffindor") {

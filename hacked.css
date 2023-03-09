@@ -219,6 +219,10 @@ button:hover {
   place-items: center end;
 }
 
+.bloodsvg {
+  width: 20%;
+}
+
 .studentName {
   display: grid;
   place-items: center start;
@@ -226,7 +230,8 @@ button:hover {
 }
 .studentName p,
 .moreInfo p,
-.closebtn {
+.closebtn,
+.houseNamePop {
   color: whitesmoke;
 }
 .show {

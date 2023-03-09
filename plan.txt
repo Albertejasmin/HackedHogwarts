@@ -20,10 +20,8 @@ Note -->
     and remove them again. Any number of students can be appointed, 
     but only pure-blood or students from Slytherin. 
 
-
-BLOOD-STATUS:
-- LOAD JSON DATA   !!
-- tildel svg'erne
+MORE INFO KNAPPER:
+- virker ikke efter første klik.... !!
 
 POPUP:
 - tjek at der vises alle detaljer (husk house)
