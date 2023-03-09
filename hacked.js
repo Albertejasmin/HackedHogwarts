@@ -27,9 +27,9 @@ const Student = {
   nickName: "",
   image: "",
   house: "",
-  prefect: false,
+  prefect: "",
   bloodtype: "",
-  inqusitorial: false,
+  inquisitor: false,
   expelled: false,
 };
 
@@ -58,16 +58,6 @@ function addButtons() {
   });
 }
 
-// // Load json
-// function loadJSON() {
-//   console.log("fetcher jsondata");
-//   fetch("https://petlatkea.dk/2021/hogwarts/students.json")
-//     .then((response) => response.json())
-//     .then((jsonData) => {
-//       // when loaded, prepare objects
-//       prepareObjects(jsonData);
-//     });
-// }
 // Load json
 async function loadJSON() {
   console.log("fetcher jsondata");
@@ -198,9 +188,12 @@ function displayStudent(student) {
   clone.querySelector("[data-field=firstname]").textContent = student.firstName;
   clone.querySelector("[data-field=prefect]").textContent = student.prefect;
   clone.querySelector("[data-field=expelled]").textContent = student.expelled;
-  clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
+  clone.querySelector("[data-field=inquisitor]").textContent = student.inquisitor;
   clone.querySelector("[data-field=image] img").src = student.image.src;
   clone.querySelector("[data-field=house]").textContent = student.house;
+  // ADD EVENTLISTNER
+  clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
+  clone.querySelector("[data-field=inquisitor]").addEventListener("click", makeInquisitor);
 
   // TILFØJER BLOOD TYPE SVG'er
   if (student.blood === "P") {
@@ -217,12 +210,44 @@ function displayStudent(student) {
   /* CLICK STUDENT POPUP */
   clone.querySelector("#student_info").addEventListener("click", showPopup);
 
+  // INQUISITOR
+
+  function makeInquisitor() {
+    let isPure;
+    let isSlytHouse;
+
+    isPure = student.blood === "P";
+    isSlytHouse = student.house === "Slytherin";
+    if (isPure && isSlytHouse) {
+      student.inquisitor = true;
+      console.log("inq is true");
+    } else if (isSlytHouse) {
+      student.inquisitor = true;
+    } else {
+      // console.log("nu skal vi lave inquisitor");
+      tryMakeInquisitor();
+    }
+    buildList();
+  }
+
+  if (student.inquisitor) {
+    console.log("inq tekst");
+    console.log(student.inquisitor);
+    clone.querySelector("[data-field=inquisitor]").textContent = "Yes";
+  } else {
+    clone.querySelector("[data-field=inquisitor]").textContent = "No";
+  }
+
+  function tryMakeInquisitor() {
+    // console.log("nu kommer der warning);
+    document.querySelector("#inqWarning").classList.remove("hide");
+    document.querySelector("#inqWarning .closebtn_dialog").addEventListener("click", closeDialog);
+  }
+
   // PREFECT
   if (student.prefect) {
-    document.querySelector("#prefectText").textContent = "Prefect: Yes";
     clone.querySelector("[data-field=prefect]").textContent = "Yes";
   } else {
-    document.querySelector("#prefectText").textContent = "Prefect: No";
     clone.querySelector("[data-field=prefect]").textContent = "No";
   }
 
@@ -270,6 +295,8 @@ function displayStudent(student) {
 
   function closeDialog() {
     document.querySelector("#remove_AorB").classList.add("hide");
+    document.querySelector("#inqWarning").classList.add("hide");
+    document.querySelector("#inqWarning .closebtn_dialog").removeEventListener("click", closeDialog);
     document.querySelector("#remove_AorB .closebtn_dialog").removeEventListener("click", closeDialog);
     document.querySelector("#remove_AorB #remove_a").removeEventListener("click", clickRemoveA);
     document.querySelector("#remove_AorB #remove_b").removeEventListener("click", clickRemoveB);
@@ -351,12 +378,31 @@ function displayStudent(student) {
     // Update the HTML with the first name
     // let getImg = document.querySelector("#studentInfo img");
     let namePop = document.querySelectorAll(".studentName p");
+    let statusPop = document.querySelectorAll(".moreInfo p");
     namePop[0].textContent = "Firstname: " + firstNamePop;
     namePop[1].textContent = "Middlename: " + middleNamePop;
     namePop[2].textContent = "Lastname: " + lastNamePop;
     namePop[3].textContent = "Nickname: " + nickNamePop;
+    // statusPop[0].textContent = "Prefect: " + student.prefect;
+    // statusPop[1].textContent = "Expelled: " + student.expelled;
+    // statusPop[3].textContent = "Inquisitorial: " + student.inquisitor;
     document.querySelector("#image img").src = student.image.src;
     document.querySelector(".houseNamePop").textContent = student.house;
+
+    // INQUISITOR TEXT PÅ POPUP
+    if (student.inquisitor) {
+      console.log("popup text");
+      document.querySelector("#inquisitorText").textContent = "Inquisitor: Yes";
+    } else {
+      document.querySelector("#inquisitorText").textContent = "Inquisitor: No";
+    }
+
+    // PREFECT TEXT PÅ POPUP
+    if (student.prefect) {
+      document.querySelector("#prefectText").textContent = "Prefect: Yes";
+    } else {
+      document.querySelector("#prefectText").textContent = "Prefect: No";
+    }
 
     // BLOODTYPE TEXT PÅ POPUP
     if (student.blood === "H") {

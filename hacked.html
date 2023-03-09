@@ -69,6 +69,7 @@
           <td data-field="lastname"></td>
           <td data-field="prefect"></td>
           <td data-field="expelled"></td>
+          <td data-field="inquisitor"></td>
           <td data-field="blood"><img class="bloodsvg" src="" alt="" /></td>
           <td data-field="house"></td>
         </tr>
@@ -95,7 +96,7 @@
           <p id="prefectText">Prefect:</p>
           <p id="expelledText">Expelled:</p>
           <p id="bloodText">Bloodtype:</p>
-          <p>Inquisitorial:</p>
+          <p id="inquisitorText">Inquisitorial:</p>
         </div>
       </article>
 
@@ -106,21 +107,7 @@
       </article>
     </section>
 
-    <!-- DIALOG 2 -PREFECT
-    <div id="remove_other" class="modal hide">
-      <div class="dialog">
-        <h1>Warning:</h1>
-        <button class="closebtn">X</button>
-        <p>
-          There can be only one prefect of each type at a time.
-          <br />
-          Do you want to remove the other prefect?
-        </p>
-        <button id="remove_other_btn">Remove <span data-field="otherPrefect">other prefect</span></button>
-      </div>
-    </div> -->
-
-    <!-- DIALOG 1  -->
+    <!-- DIALOG 1 - PREFECT -->
     <div id="remove_AorB" class="modal hide">
       <div class="dialog">
         <h1>Warning:</h1>
@@ -134,6 +121,15 @@
           <button id="remove_a">Remove <span data-field="prefectA">A</span></button>
           <button id="remove_b">Remove <span data-field="prefectB">B</span></button>
         </div>
+      </div>
+    </div>
+
+    <!-- DIALOG 2 - INQUISITOR  -->
+    <div id="inqWarning" class="modal hide">
+      <div class="dialog">
+        <h1>Warning !</h1>
+        <button class="closebtn_dialog">X</button>
+        <p>Only pure-blooded or students from Slytherin can be a member of the inqquisitorial squad.</p>
       </div>
     </div>
 

@@ -290,3 +290,6 @@ button {
 td[data-field="expelled"] {
   color: red;
 }
+td[data-field="inquisitor"] {
+  color: blue;
+}
