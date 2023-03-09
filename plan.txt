@@ -1,5 +1,7 @@
 MANGLER I OPGAVEN TO DO.. 
 
+SORTING !!
+
 FILTERING:
 - Filters that only showed those with certain responsibilities
         - prefect

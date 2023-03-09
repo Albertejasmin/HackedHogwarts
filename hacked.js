@@ -134,21 +134,15 @@ function prepareObjects(studentData, bloodData) {
     // HOUSE
     student.house = jsonObject.house.trim().charAt(0).toUpperCase() + jsonObject.house.slice(1).toLowerCase();
 
-    // let housename = jsonObject.house;
-    // housename = house.trimStart();
-    // housename = house.trimEnd();
-    // student.housename.charAt(0).toUpperCase() + housename.slice(1).toLowerCase();
-    // console.log(housename);
-
     // NICKNAME
     let nickNameClear = jsonObject.fullname.substring(jsonObject.fullname.indexOf(`"`), jsonObject.fullname.lastIndexOf(`"`) + 1);
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
     // console.log(student.nickName);
 
-    let blood;
-
     // FIND BLOOD STATUS
+
+    let blood;
 
     const isHalfBlood = bloodData.half.includes(student.lastName);
     const isPureBlood = bloodData.pure.includes(student.lastName);
