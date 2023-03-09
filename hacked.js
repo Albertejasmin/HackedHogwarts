@@ -13,6 +13,7 @@ const settings = {
   filter: "all",
   sortBy: "house",
   sortDir: "asc",
+  sortExpel: false,
 };
 
 let studentInfo = document.querySelector("#student");
@@ -510,8 +511,17 @@ function isRave(student) {
 }
 
 function buildList() {
+  console.log("BUILD LIST");
+  console.log("settings.sortExpel", settings.sortExpel);
+  let studentToWorkWith;
+  if (settings.sortExpel) {
+    studentToWorkWith = allExpelledStudents;
+  } else {
+    studentToWorkWith = allStudents;
+  }
+
   // først filterer vi
-  const currentList = filterList(allStudents);
+  const currentList = filterList(studentToWorkWith);
   const sortedList = sortList(currentList);
   // kalder displayList med vores sortedList
 
@@ -552,10 +562,11 @@ function buildList() {
 }
 
 //Click expelled sorting
-document.querySelector("#expelledButton").addEventListener("click", expelledList());
+document.querySelector("#expelledButton").addEventListener("click", expelledList);
 
 /*BYG LISTE AF EXPELLED STUDENTS -SORTING*/
 function expelledList() {
+  settings.sortExpel = true;
   console.log("explled button cliked");
   /* laver en ny liste med de expelled students*/
   const expelList = filterList(allExpelledStudents);
@@ -601,7 +612,7 @@ function setSort(sortBy, sortDir) {
   settings.sortBy = sortBy;
   settings.sortDir = sortDir;
   buildList();
-  expelledList();
+  /* expelledList(); */
 }
 
 function sortList(sortedList) {
