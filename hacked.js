@@ -58,6 +58,16 @@ function addButtons() {
   });
 }
 
+// // Load json
+// function loadJSON() {
+//   console.log("fetcher jsondata");
+//   fetch("https://petlatkea.dk/2021/hogwarts/students.json")
+//     .then((response) => response.json())
+//     .then((jsonData) => {
+//       // when loaded, prepare objects
+//       prepareObjects(jsonData);
+//     });
+// }
 // Load json
 async function loadJSON() {
   console.log("fetcher jsondata");
@@ -246,8 +256,10 @@ function displayStudent(student) {
 
   // PREFECT
   if (student.prefect) {
+    document.querySelector("#prefectText").textContent = "Prefect: Yes";
     clone.querySelector("[data-field=prefect]").textContent = "Yes";
   } else {
+    document.querySelector("#prefectText").textContent = "Prefect: No";
     clone.querySelector("[data-field=prefect]").textContent = "No";
   }
 
