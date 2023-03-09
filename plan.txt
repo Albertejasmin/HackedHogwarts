@@ -1,6 +1,6 @@
 MANGLER I OPGAVEN TO DO.. 
 
-SORTING !!
+SORTING !! Den er fucked !
 
 HACKING !! 
 
@@ -17,12 +17,6 @@ Expelling student:
 (You must decide what to do when a name occurs in both lists - 
 either respect the tradition of the pure-blood, and ignore the half-blood part, 
 or take the stricter approach and mark any possible half-blood as just that, half-blood)
-
-Inquisitorial Squad:
-Note --> 
--   The user must be able to appoint students to the inquisitorial squad, 
-    and remove them again. Any number of students can be appointed, 
-    but only pure-blood or students from Slytherin. 
 
 
 POPUP:
