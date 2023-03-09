@@ -58,16 +58,6 @@ function addButtons() {
   });
 }
 
-// // Load json
-// function loadJSON() {
-//   console.log("fetcher jsondata");
-//   fetch("https://petlatkea.dk/2021/hogwarts/students.json")
-//     .then((response) => response.json())
-//     .then((jsonData) => {
-//       // when loaded, prepare objects
-//       prepareObjects(jsonData);
-//     });
-// }
 // Load json
 async function loadJSON() {
   console.log("fetcher jsondata");
@@ -214,9 +204,6 @@ function displayStudent(student) {
   /* CLICK EXPELLED SORT*/
   clone.querySelector("[data-field=expelled]").addEventListener("click", expelStudent);
 
-  /* CLICK STUDENT POPUP */
-  clone.querySelector("#student_info").addEventListener("click", showPopup);
-
   // PREFECT
   if (student.prefect) {
     document.querySelector("#prefectText").textContent = "Prefect: Yes";
@@ -325,11 +312,14 @@ function displayStudent(student) {
     buildList();
   }
 
+  /* CLICK STUDENT POPUP */
+  clone.querySelector("#student_info").addEventListener("click", showPopup);
+
   /* POPUP STUDENT */
   /* vis popup  */
   function showPopup() {
+    console.log("SHOW POPUP");
     let popup = document.querySelector("#popupContainer");
-    popup.classList.add("show");
     popup.style.display = "block";
 
     // Make element visible
@@ -376,10 +366,10 @@ function displayStudent(student) {
     } else {
       document.querySelector("#popupContainer").style.backgroundColor = "white";
     }
-
-    // Listen for click on close button
-    document.querySelector(".closebtn").addEventListener("click", closePopup);
   }
+
+  // Listen for click on close button
+  document.querySelector(".closebtn").addEventListener("click", closePopup);
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
@@ -388,9 +378,7 @@ function displayStudent(student) {
 /* luk popup */
 function closePopup() {
   let closePopup = document.querySelector("#popupContainer");
-  closePopup.classList.add("hide");
   closePopup.style.display = "none";
-  // document.querySelector("#prefectText").textContent;
 }
 
 // DROPDOWN
