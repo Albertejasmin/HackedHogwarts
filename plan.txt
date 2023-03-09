@@ -2,6 +2,8 @@ MANGLER I OPGAVEN TO DO..
 
 SORTING !!
 
+HACKING !! 
+
 FILTERING:
 - Filters that only showed those with certain responsibilities
         - prefect
@@ -22,16 +24,13 @@ Note -->
     and remove them again. Any number of students can be appointed, 
     but only pure-blood or students from Slytherin. 
 
-MORE INFO KNAPPER:
-- virker ikke efter første klik.... !!
 
 POPUP:
-- tjek at der vises alle detaljer (husk house)
+- tag stilling til knapperne
 
 ABOUT --> i tvivl om hvad den mener
 
 
-HACKING !!: 
 
 
 DOCUMENTATION: 
