@@ -1,3 +1,64 @@
+MANGLER I OPGAVEN TO DO.. 
+
+FILTERING:
+- Filters that only showed those with certain responsibilities
+        - prefect
+        - inquisitor
+        - expelled 
+
+
+Expelling student:
+- husk --> Once expelled, a student cannot return to the original list.
+
+(You must decide what to do when a name occurs in both lists - 
+either respect the tradition of the pure-blood, and ignore the half-blood part, 
+or take the stricter approach and mark any possible half-blood as just that, half-blood)
+
+Inquisitorial Squad:
+Note --> 
+-   The user must be able to appoint students to the inquisitorial squad, 
+    and remove them again. Any number of students can be appointed, 
+    but only pure-blood or students from Slytherin. 
+
+
+BLOOD-STATUS:
+- LOAD JSON DATA   !!
+- tildel svg'erne
+
+POPUP:
+- tjek at der vises alle detaljer (husk house)
+
+ABOUT --> i tvivl om hvad den mener
+
+
+HACKING !!: 
+
+
+DOCUMENTATION: 
+
+- Wireframe for the visual design 
+    - include all the dialog-boxes and modals!
+
+- An overview of the various components of the application
+
+- A list of features / user stories 
+    (e.g.: sort by first name, sort by last name, etc.)
+
+- A can/can't list of each component or activity, 
+  with a note on whether you know how to do it or not (at the beginning of the design)
+
+- Pseudocode or activity diagrams for algorithms:
+    - Expelling (incl check for not-expelling you)
+    - Prefects
+    - Blood-status (original decision-algorithm)
+    - hackTheSystem function and additional hacking-features
+
+- Complete activity diagram for all the functions, which parameters they receive, and values they return
+- A list of Student-object properties, e.g. firstName, lastName, imageName and so on. Could be a screengrab of the Student object
+
+
+
+
 TO-DO:
 - Tegn blodtyper i illustrator :) 
 - få baggrund til popup til at skifte alt efter house
