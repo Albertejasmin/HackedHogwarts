@@ -82,14 +82,12 @@ async function loadJSON() {
 
 // Creating new array with cleaned Student data
 function prepareObjects(studentData, bloodData) {
-  console.log("all s", allStudents);
-  console.log("bloodData", bloodData);
-  // console.log(jsonData);
   studentData.forEach((jsonObject) => {
     // TODO: Create new object with cleaned data - and store that in the allAnimals array
     const student = Object.create(Student);
 
     const text = jsonObject.fullname.trim().split(" ");
+    const fullName = jsonObject.fullname.trim();
     // console.log("variabler oprettet");
 
     // FIRSTNAME
@@ -124,21 +122,37 @@ function prepareObjects(studentData, bloodData) {
     // imgSrc.src = `./images/${lastNameImage}_${firstNameImage}.png`;
     // console.log(student.image);
 
-    if (lastNameImage === "Leanne") {
-      imgSrc = "";
-    } else if (lastNameImage.includes("Patil")) {
-      imgSrc.src = "./images/" + lastNameImage + "_" + student.firstName.toLowerCase() + ".png";
-    } else if (lastNameImage.includes("-")) {
-      imgSrc.src = "./images/" + lastNameImage.substring(lastNameImage.indexOf("-") + 1) + "_" + firstNameImage + ".png";
-    }
-    // HOUSE
-    student.house = jsonObject.house.trim().charAt(0).toUpperCase() + jsonObject.house.slice(1).toLowerCase();
-
     // NICKNAME
     let nickNameClear = jsonObject.fullname.substring(jsonObject.fullname.indexOf(`"`), jsonObject.fullname.lastIndexOf(`"`) + 1);
 
     student.nickName = nickNameClear.replaceAll(`"`, ``);
-    // console.log(student.nickName);
+
+    // FIXING LEANNE, ERNIE AND FINCH
+    if (fullName.includes(" ") === false) {
+      student.firstName = capitalize(fullName.substring(0));
+      student.lastName = "";
+    }
+    if (student.middleName.includes(`"`)) {
+      student.nickName = capitalize(student.middleName.substring(1, student.middleName.length - 1));
+      student.middleName = "";
+    }
+    if (student.lastName.includes("-")) {
+      student.lastName = student.lastName.split("-")[0] + "-" + capitalize(student.lastName.split("-")[1]);
+    }
+    // FIXING IMAGES FOR LEANNE, PATIL AND FINCH
+    if (lastNameImage.includes("-")) {
+      imgSrc.src = "./images/" + lastNameImage.substring(lastNameImage.indexOf("-") + 1) + "_" + firstNameImage + ".png";
+    } else if (lastNameImage === "Leanne") {
+      imgSrc.src = "";
+    } else if (lastNameImage.includes("patil")) {
+      imgSrc.src = "./images/" + lastNameImage + "_" + student.firstName.toLowerCase() + ".png";
+    }
+
+    // HOUSE
+    let housename = jsonObject.house;
+    housename = housename.trimStart();
+    housename = housename.trimEnd();
+    student.house = housename.charAt(0).toUpperCase() + housename.slice(1).toLowerCase();
 
     // FIND BLOOD STATUS
 
@@ -157,7 +171,6 @@ function prepareObjects(studentData, bloodData) {
     } else {
       student.blood = "M";
     }
-    console.log(student.lastName + " " + student.blood);
 
     // Tilføjer det nye object til vores array allStudents
     allStudents.push(student);
@@ -174,7 +187,6 @@ function displayList(students) {
   document.querySelector("#list tbody").innerHTML = "";
   // build a new list
   students.forEach(displayStudent);
-  console.log("nu er vi i display listen");
 }
 
 function displayStudent(student) {
@@ -207,10 +219,10 @@ function displayStudent(student) {
 
   // PREFECT
   if (student.prefect) {
-    document.querySelector("#prefectText").textContent = "prefect: Yes";
+    document.querySelector("#prefectText").textContent = "Prefect: Yes";
     clone.querySelector("[data-field=prefect]").textContent = "Yes";
   } else {
-    document.querySelector("#prefectText").textContent = "prefect: No";
+    document.querySelector("#prefectText").textContent = "Prefect: No";
     clone.querySelector("[data-field=prefect]").textContent = "No";
   }
 
@@ -290,10 +302,10 @@ function displayStudent(student) {
 
   if (student.expelled) {
     clone.querySelector("[data-field=expelled]").textContent = "Expelled";
-    document.querySelector("#expelledText").textContent = "prefect: Yes";
+    document.querySelector("#expelledText").textContent = "Expelled: Yes";
   } else {
     clone.querySelector("[data-field=expelled]").textContent = "Expell";
-    document.querySelector("#expelledText").textContent = "prefect: No";
+    document.querySelector("#expelledText").textContent = "Expelled: No";
   }
 
   function expelStudent() {
@@ -497,8 +509,13 @@ function expelledList() {
 
 // Capitalize function
 function capitalize(str) {
-  const capStr = str.toUpperCase();
+  const capStr = str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
   return capStr;
+}
+// Capitalize function
+function capitalizeFull(str) {
+  const capStrFull = str.toUpperCase();
+  return capStrFull;
 }
 
 // SORTING
@@ -507,19 +524,13 @@ function selectSort(event) {
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
 
-  // // find "old" sortBy element and remove .sortBy
-  // const oldArrow = document.querySelector(`[data-sort=${settings.sortBy}]`);
-  // oldArrow.classList.remove("sortby");
-  // // indicate active sort
-  // event.target.classList.add("sortby");
-
   // Toggle the direction !
   if (sortDir === "asc") {
     event.target.dataset.sortDirection = "desc";
-    document.querySelector("#hasDropDown span").textContent = `${capitalize(sortBy)} ( A - Z )`;
+    document.querySelector("#hasDropDown span").textContent = `${capitalizeFull(sortBy)} ( A - Z )`;
   } else {
     event.target.dataset.sortDirection = "asc";
-    document.querySelector("#hasDropDown span").textContent = `${capitalize(sortBy)} ( Z - A )`;
+    document.querySelector("#hasDropDown span").textContent = `${capitalizeFull(sortBy)} ( Z - A )`;
   }
 
   console.log(`User selected ${sortBy} - ${sortDir}`);
