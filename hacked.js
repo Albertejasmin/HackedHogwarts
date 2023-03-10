@@ -14,6 +14,7 @@ const settings = {
   sortBy: "house",
   sortDir: "asc",
   sortExpel: false,
+  sortPref: false,
 };
 
 let studentInfo = document.querySelector("#student");
@@ -462,6 +463,7 @@ function toggleDropDown(evt) {
 
 // FILTER HOUSE FUNCTIONS
 function selectHouse(event) {
+  settings.sortExpel = false;
   const filter = event.target.dataset.filter;
   console.log(`User selected ${filter}`);
   //   Kalder setFilter(med det selectede filter)
@@ -591,6 +593,8 @@ function capitalizeFull(str) {
 
 // SORTING
 function selectSort(event) {
+  settings.sortExpel = false;
+  // settings.prefect = true;
   console.log("selectSort", event);
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
