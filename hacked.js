@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", start);
 const allStudents = [];
 
 let allExpelledStudents = [];
+let allPrefectStudents = [];
 
 // variabler
 
@@ -219,6 +220,7 @@ function displayStudent(student) {
 
   /* CLICK EXPELLED SORT*/
   clone.querySelector("[data-field=expelled]").addEventListener("click", expelStudent);
+  clone.querySelector("[data-field=prefect]").addEventListener("click", prefectStudent);
 
   /* CLICK STUDENT POPUP */
   clone.querySelector("#student_info").addEventListener("click", showPopup);
@@ -367,6 +369,21 @@ function displayStudent(student) {
     buildList();
   }
 
+  function prefectStudent() {
+    student.prefect = true;
+    // const studentID2 = allPrefectStudents.findIndex((jsonObject) => jsonObject.firstName === student.firstName);
+    // allPrefectStudents.splice(studentID2, 1);
+
+    const studentID2 = allStudents.indexOf(student);
+    const newPrefectStudent = allStudents.splice(studentID2, 1);
+
+    const movePrefectStudent = newPrefectStudent.shift();
+
+    allPrefectStudents.push(movePrefectStudent);
+    console.log(allPrefectStudents);
+    buildList();
+  }
+
   /* CLICK STUDENT POPUP */
   clone.querySelector("#student_info").addEventListener("click", showPopup);
 
@@ -464,6 +481,7 @@ function toggleDropDown(evt) {
 // FILTER HOUSE FUNCTIONS
 function selectHouse(event) {
   settings.sortExpel = false;
+  settings.sortPref = false;
   const filter = event.target.dataset.filter;
   console.log(`User selected ${filter}`);
   //   Kalder setFilter(med det selectede filter)
@@ -494,7 +512,6 @@ function filterList(filteredList) {
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isRave);
   }
-
   return filteredList;
 }
 
@@ -519,6 +536,8 @@ function buildList() {
   let studentToWorkWith;
   if (settings.sortExpel) {
     studentToWorkWith = allExpelledStudents;
+  } else if (settings.sortPref) {
+    studentToWorkWith = allPrefectStudents;
   } else {
     studentToWorkWith = allStudents;
   }
@@ -566,10 +585,13 @@ function buildList() {
 
 //Click expelled sorting
 document.querySelector("#expelledButton").addEventListener("click", expelledList);
+//Click prefect sorting
+document.querySelector("#prefectButton").addEventListener("click", prefectList);
 
 /*BYG LISTE AF EXPELLED STUDENTS -SORTING*/
 function expelledList() {
   settings.sortExpel = true;
+  settings.sortPref = false;
   console.log("explled button cliked");
   /* laver en ny liste med de expelled students*/
   const expelList = filterList(allExpelledStudents);
@@ -578,6 +600,19 @@ function expelledList() {
   displayList(sortExpelled);
   console.log("expelled list");
   document.querySelector("h3").textContent = `The list has ${expelList.length} students`;
+}
+
+function prefectList() {
+  settings.sortPref = true;
+  settings.sortExpel = false;
+  console.log("prefect button cliked");
+  /* laver en ny liste med de expelled students*/
+  const prefList = filterList(allPrefectStudents);
+  console.log(prefList);
+  const sortPrefect = sortList(prefList);
+  displayList(sortPrefect);
+  console.log("prefect list");
+  document.querySelector("h3").textContent = `The list has ${prefList.length} students`;
 }
 
 // Capitalize function
@@ -594,7 +629,7 @@ function capitalizeFull(str) {
 // SORTING
 function selectSort(event) {
   settings.sortExpel = false;
-  // settings.prefect = true;
+  settings.prefect = true;
   console.log("selectSort", event);
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;

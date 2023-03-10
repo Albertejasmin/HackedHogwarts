@@ -16,7 +16,7 @@
     </header>
     <section class="allButtons">
       <section id="filter_buttons">
-        <button id="all_students" data-action="filter" data-filter="*">ALL STUDENTS</button>
+        <button id="all_students" data-action="filter" data-filter="all">ALL STUDENTS</button>
         <button class="gryffindor" data-action="filter" data-filter="gryffindor">GRYFFINDOR</button>
         <button class="slytherin" data-action="filter" data-filter="slytherin">SLYTHERIN</button>
         <button class="hufflepuff" data-action="filter" data-filter="hufflepuff">HUFFLEPUFF</button>
@@ -32,10 +32,7 @@
             <p data-action="sort" data-sort-direction="asc" data-sort="firstName">Firstname</p>
             <p data-action="sort" data-sort-direction="asc" data-sort="lastName">Lastname</p>
           </div>
-        </div>
-        <button data-action="sort" data-sort="prefect">PREFECT STUDENTS</button>
-        <button id="expelledButton" data-sort="expelled">EXPELLED STUDENTS</button>
-        <div id="dropDownContainer">
+          <!-- <div id="dropDownContainer">
           <button id="bloodtypeDropDown">
             <span>BLOODTYPE ↓</span>
           </button>
@@ -44,7 +41,10 @@
             <p data-action="sort" data-sort="H">Halfblood</p>
             <p data-action="sort" data-sort="M">Muggle</p>
           </div>
+        </div> -->
         </div>
+        <button id="prefectButton" data-sort="prefect">PREFECT STUDENTS</button>
+        <button id="expelledButton" data-sort="expelled">EXPELLED STUDENTS</button>
       </section>
     </section>
 

@@ -32,16 +32,30 @@ button {
   padding: 1rem;
   margin: 2rem 1rem;
 }
-#sort_buttons button {
+#nameDropDown {
   padding: 1rem;
   margin: 2rem 1rem;
   border: none;
   background-color: transparent;
   border-bottom: solid 1px;
+  margin: 0px;
 }
 
-#sort_buttons button:hover {
+#prefectButton,
+#expelledButton {
+  padding: 1rem;
+  margin: 2rem 1rem;
+  background-color: transparent;
+  border: solid 1px;
+}
+
+#nameDropDown:hover {
   border-bottom: solid 2.5px;
+}
+
+#prefectButton:hover,
+#expelledButton:hover {
+  border: solid 3px;
 }
 
 tr,
@@ -119,7 +133,7 @@ button:hover {
 #dropDown {
   /* display: none; */
   position: absolute;
-  background-color: bisque;
+  background-color: rgb(179, 179, 179);
   min-width: 160px;
   z-index: 1;
 }
