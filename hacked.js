@@ -499,19 +499,31 @@ function filterList(filteredList) {
     console.log("This is gryffindor");
     // Create a filtered list of only cats
     filteredList = allStudents.filter(isGryf);
+    document.querySelector("#expelledButton").classList.add("hide");
+    document.querySelector("#prefectButton").classList.add("hide");
   } else if (settings.filterBy === "slytherin") {
     console.log("This is slytherin");
+    document.querySelector("#expelledButton").classList.add("hide");
+    document.querySelector("#prefectButton").classList.add("hide");
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isSlyt);
   } else if (settings.filterBy === "hufflepuff") {
+    document.querySelector("#expelledButton").classList.add("hide");
+    document.querySelector("#prefectButton").classList.add("hide");
     console.log("This is hufflepuff");
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isHuff);
   } else if (settings.filterBy === "ravenclaw") {
     console.log("This is ravenclaw");
+    document.querySelector("#expelledButton").classList.add("hide");
+    document.querySelector("#prefectButton").classList.add("hide");
     // Create a filtered list of only dogs
     filteredList = allStudents.filter(isRave);
+  } else if (settings.filterBy === "all") {
+    document.querySelector("#expelledButton").classList.remove("hide");
+    document.querySelector("#prefectButton").classList.remove("hide");
   }
+
   return filteredList;
 }
 
