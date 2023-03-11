@@ -548,6 +548,7 @@ function addMyself() {
     blood: "Half",
     squad: false,
     prefect: false,
+    image: "",
   };
   // Tilføjer "me" til studentlist
   allStudents.unshift(me);
@@ -583,15 +584,11 @@ function removeAsInq() {
     setTimeout(function () {
       alertFromHacker();
 
-      document.querySelector("#hacking_msg").textContent = "All students were removed as Inquisitors";
-    }, 3000);
+      document.querySelector("#hacking_msg h1").textContent = "All students were removed as Inquisitors";
+    }, 11000);
   });
 
   allInquisitorStudents = [];
-
-  // if (document.querySelector("#filter span").textContent === "Filter  ") {
-  //   allStudents = allInquisitorStudents;
-  // }
 
   buildList();
 }
