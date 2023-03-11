@@ -21,6 +21,7 @@ const settings = {
 let studentInfo = document.querySelector("#student");
 let filterBy = "all";
 let sortDropDown = "";
+let isHacked = false;
 
 // Laver prototypen til Student objects
 const Student = {
@@ -55,11 +56,14 @@ function addButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   // DROPDOWN
   document.querySelector("#nameDropDown").addEventListener("click", toggleDropDown);
-  document.querySelector("#bloodtypeDropDown").addEventListener("click", toggleDropDown);
+  /* document.querySelector("#bloodtypeDropDown").addEventListener("click", toggleDropDown); */
   /* Bliver nødt til at lave forEach for at den tager fat i begge p tags og dermed lukker uansetm om klik på fornavn eller efternavn */
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
   });
+
+  /* Click hack */
+  document.querySelector("#hacking_btn").addEventListener("click", hacking);
 }
 
 // // Load json
@@ -226,7 +230,6 @@ function displayStudent(student) {
   clone.querySelector("#student_info").addEventListener("click", showPopup);
 
   // INQUISITOR
-
   function makeInquisitor() {
     let isPure;
     let isSlytHouse;
@@ -470,6 +473,32 @@ function displayStudent(student) {
 function closePopup() {
   let closePopup = document.querySelector("#popupContainer");
   closePopup.style.display = "none";
+}
+
+//Hacking
+function hacking() {
+  console.log("haking btn was cliked");
+  if (isHacked === false) {
+    isHacked = true;
+    console.log(isHacked);
+
+    /* dialog box for hacking */
+    document.querySelector("#hacking_msg").classList.remove("hide");
+    document.querySelector(".dialog h1").textContent = " Oh no... The system was hacked!";
+    /* sætter et dealy mens hacking sker */
+    setTimeout(function () {
+      /* document.querySelector("#hacking_msg").classList.add("hide"); */
+      document.querySelector(".dialog h1").textContent = " Beware... A new student was added!";
+    }, 3000);
+
+    /* dialog box -bloodtypes messed up */
+    /*   document.querySelector("#hacked_blood").classList.remove("hide"); */
+
+    /* sætter et dealypå besked */
+    /*   setTimeout(function () {
+      document.querySelector("#hacked_blood").classList.add("hide");
+    }, 5000); */
+  }
 }
 
 // DROPDOWN

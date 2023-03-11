@@ -10,6 +10,9 @@
   <body>
     <header>
       <h1>Hogwarts Student List</h1>
+      <div id="hacking_container">
+        <button id="hacking_btn">Hacking</button>
+      </div>
       <div id="search">
         <input type="search" id="search" placeholder="Type here to search" />
       </div>
@@ -138,9 +141,26 @@
       <div class="dialog">
         <h1>Warning !</h1>
         <button class="closebtn_dialog">X</button>
-        <p>Only pure-blooded or students from Slytherin can be a member of the inqquisitorial squad.</p>
+        <p>Only pure-blooded or students from Slytherin can be a member of the inquisitorial squad.</p>
       </div>
     </div>
+
+    <!-- HACKED DIALOG -->
+    <section id="hacking_msg" class="modal hide">
+      <h1 class="dialog"></h1>
+    </section>
+
+    <section id="hacked_blood" class="modal hide">
+      <div class="dialog">
+        <h1 class="dialog">All the bloodtypes were messed up</h1>
+      </div>
+    </section>
+    <section id="hacked_addMe" class="modal hide">
+      <div class="dialog">
+        <button class="closebtn_dialog">X</button>
+        <h1></h1>
+      </div>
+    </section>
 
     <script src="hacked.js"></script>
   </body>
