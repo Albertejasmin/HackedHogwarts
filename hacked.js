@@ -484,21 +484,37 @@ function hacking() {
 
     /* dialog box for hacking */
     document.querySelector("#hacking_msg").classList.remove("hide");
-    document.querySelector(".dialog h1").textContent = " Oh no... The system was hacked!";
+    document.querySelector("#hacking_msg h1").textContent = "Oh Nooo... The system was hacked";
     /* sætter et dealy mens hacking sker */
     setTimeout(function () {
-      /* document.querySelector("#hacking_msg").classList.add("hide"); */
-      document.querySelector(".dialog h1").textContent = " Beware... A new student was added!";
-    }, 3000);
+      document.querySelector("#hacking_msg").classList.add("hide");
+    }, 3500);
 
-    /* dialog box -bloodtypes messed up */
-    /*   document.querySelector("#hacked_blood").classList.remove("hide"); */
+    setTimeout(function () {
+      alertFromHacker();
+      document.querySelector("#hacking_msg h1").textContent = "Beware! A new student was added to the Howarts studentlist";
+    }, 4000);
 
-    /* sætter et dealypå besked */
-    /*   setTimeout(function () {
-      document.querySelector("#hacked_blood").classList.add("hide");
-    }, 5000); */
+    setTimeout(function () {
+      alertFromHacker();
+
+      document.querySelector("#hacking_msg h1").textContent = "All the bloodtypes is messed up!";
+    }, 7500);
+  } else {
+    alertFromHacker();
+
+    document.querySelector("#hacking_msg h1").textContent = "The system has already been hacked";
   }
+
+  buildList();
+}
+
+function alertFromHacker() {
+  document.querySelector("#hacking_msg").classList.remove("hide");
+
+  setTimeout(function () {
+    document.querySelector("#hacking_msg").classList.add("hide");
+  }, 3000);
 }
 
 // DROPDOWN
