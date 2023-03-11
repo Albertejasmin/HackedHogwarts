@@ -63,7 +63,7 @@ function addButtons() {
   });
 
   /* Click hack */
-  document.querySelector("#hacking_btn").addEventListener("click", hacking);
+  document.querySelector("#hacking_btn").addEventListener("click", hackTheSystem);
 }
 
 // // Load json
@@ -476,7 +476,7 @@ function closePopup() {
 }
 
 //Hacking
-function hacking() {
+function hackTheSystem() {
   console.log("haking btn was cliked");
   if (isHacked === false) {
     isHacked = true;
