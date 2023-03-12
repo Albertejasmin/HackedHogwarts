@@ -43,10 +43,6 @@ function start() {
   console.log("ready");
   loadJSON();
   addButtons();
-
-  // tilføjer eventlistners til knapperne
-
-  // document.querySelector("#squadedButton").addEventListener("click", showSquadedStudents);
 }
 
 // BUTTON FILTER + SORT EVENTLISTNERS CLICK
@@ -58,7 +54,6 @@ function addButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   // DROPDOWN
   document.querySelector("#nameDropDown").addEventListener("click", toggleDropDown);
-  /* document.querySelector("#bloodtypeDropDown").addEventListener("click", toggleDropDown); */
   /* Bliver nødt til at lave forEach for at den tager fat i begge p tags og dermed lukker uansetm om klik på fornavn eller efternavn */
   document.querySelectorAll("#dropDown p").forEach(function (element) {
     element.addEventListener("click", toggleDropDown);
@@ -68,16 +63,6 @@ function addButtons() {
   document.querySelector("#hacking_btn").addEventListener("click", hackTheSystem);
 }
 
-// // Load json
-// function loadJSON() {
-//   console.log("fetcher jsondata");
-//   fetch("https://petlatkea.dk/2021/hogwarts/students.json")
-//     .then((response) => response.json())
-//     .then((jsonData) => {
-//       // when loaded, prepare objects
-//       prepareObjects(jsonData);
-//     });
-// }
 // Load json
 async function loadJSON() {
   console.log("fetcher jsondata");
@@ -93,9 +78,7 @@ async function loadJSON() {
 // Creating new array with cleaned Student data
 function prepareObjects(studentData, bloodData) {
   studentData.forEach((jsonObject) => {
-    // TODO: Create new object with cleaned data - and store that in the allAnimals array
     const student = Object.create(Student);
-
     const text = jsonObject.fullname.trim().split(" ");
     const fullName = jsonObject.fullname.trim();
     // console.log("variabler oprettet");
@@ -107,7 +90,6 @@ function prepareObjects(studentData, bloodData) {
     //    MIDDLENAME
     // If there are more than 2 text in the full name, the middle name(s) are present
     if (text.length > 2) {
-      // console.log(text[1].charAt(0).toUpperCase() + text[1].slice(1).toLowerCase());
       // Capitalize and clean the first middle name
       student.middleName = text[1].charAt(0).toUpperCase() + text[1].slice(1).toLowerCase();
     } else if (text.length === 2) {
@@ -128,9 +110,6 @@ function prepareObjects(studentData, bloodData) {
     let firstNameImage = student.firstName.charAt(0).toLowerCase();
     // finder mappen til billederne
     imgSrc.src = "./images/" + lastNameImage + "_" + firstNameImage + ".png";
-    // Sætningen under er det samme som ovenstående, bare ved brug af $ - de begge virker
-    // imgSrc.src = `./images/${lastNameImage}_${firstNameImage}.png`;
-    // console.log(student.image);
 
     // NICKNAME
     let nickNameClear = jsonObject.fullname.substring(jsonObject.fullname.indexOf(`"`), jsonObject.fullname.lastIndexOf(`"`) + 1);
@@ -405,8 +384,6 @@ function displayStudent(student) {
 
   function prefectStudent() {
     student.prefect = true;
-    // const studentID2 = allPrefectStudents.findIndex((jsonObject) => jsonObject.firstName === student.firstName);
-    // allPrefectStudents.splice(studentID2, 1);
 
     const studentID2 = allStudents.indexOf(student);
     const newPrefectStudent = allStudents.splice(studentID2, 1);
@@ -422,7 +399,6 @@ function displayStudent(student) {
   clone.querySelector("#student_info").addEventListener("click", showPopup);
 
   /* POPUP STUDENT */
-  /* vis popup  */
   function showPopup() {
     console.log("SHOW POPUP");
     let popup = document.querySelector("#popupContainer");
@@ -439,19 +415,15 @@ function displayStudent(student) {
     let lastNamePop = student.lastName;
     let nickNamePop = student.nickName;
 
-    // let imagePop = student.image;
-
     // Update the HTML with the first name
-    // let getImg = document.querySelector("#studentInfo img");
+
     let namePop = document.querySelectorAll(".studentName p");
     let statusPop = document.querySelectorAll(".moreInfo p");
     namePop[0].textContent = "Firstname: " + firstNamePop;
     namePop[1].textContent = "Middlename: " + middleNamePop;
     namePop[2].textContent = "Lastname: " + lastNamePop;
     namePop[3].textContent = "Nickname: " + nickNamePop;
-    // statusPop[0].textContent = "Prefect: " + student.prefect;
-    // statusPop[1].textContent = "Expelled: " + student.expelled;
-    // statusPop[3].textContent = "Inquisitorial: " + student.inquisitor;
+
     document.querySelector("#image img").src = student.image.src;
     document.querySelector(".houseNamePop").textContent = student.house;
 
@@ -707,8 +679,6 @@ function buildList() {
   // kalder displayList med vores sortedList
 
   displayList(sortedList);
-  // console.log("displayList kaldes", allStudents);
-  // console.log("displayList kaldes", currentList);
   document.querySelector("h3").textContent = `The list has ${sortedList.length} students`;
 
   /* Click search */
@@ -820,7 +790,6 @@ function selectSort(event) {
     event.target.dataset.sortDirection = "asc";
     document.querySelector("#nameDropDown span").textContent = `${capitalizeFull(sortBy)} ( Z - A )`;
   }
-
   console.log(`User selected ${sortBy} - ${sortDir}`);
   //   Kalder sortList(med det valgte sorting
   setSort(sortBy, sortDir);
@@ -834,7 +803,6 @@ function setSort(sortBy, sortDir) {
 }
 
 function sortList(sortedList) {
-  // let sortedList = allAnimals;
   let direction = 1;
   if (settings.sortDir === "desc") {
     direction = -1;
@@ -847,7 +815,6 @@ function sortList(sortedList) {
   // SORTING BY  NAME med CLOSURE !! nødvendigt for at vi kan bruge sortBy parametret
   function sortByProperty(A, Z) {
     // console.log(`SortBy is ${sortBy}`);
-    // siger hvis animalA kommer før < animalB
     if (A[settings.sortBy] < Z[settings.sortBy]) {
       return -1 * direction;
     } else {
