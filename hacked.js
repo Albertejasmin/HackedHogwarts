@@ -356,7 +356,7 @@ function displayStudent(student) {
   }
 
   function expelStudent() {
-    if (student.lastName === "Alberte") {
+    if (student.lastName === "Sofia") {
       alertFromHacker();
       document.querySelector("#hacking_msg h1").textContent = "Hacker cannot be removed!";
     } else {
@@ -523,7 +523,7 @@ function addMyself() {
   const me = {
     firstName: "Hacker",
     middleName: "",
-    lastName: "Alberte",
+    lastName: "Sofia",
     nickName: "",
     house: "Slytherin",
     expelled: false,
