@@ -113,9 +113,12 @@ button:hover {
 }
 
 #list td:nth-of-type(2) {
-  width: 24rem;
-  padding-left: 3rem;
+  width: 18rem;
+  padding-left: 2.5rem;
   font-size: 23px;
+}
+td {
+  font-size: 20px;
 }
 
 /* ARROW */
@@ -236,7 +239,7 @@ button:hover {
 }
 
 .bloodsvg {
-  width: 20%;
+  max-width: 45px;
 }
 
 .studentName {

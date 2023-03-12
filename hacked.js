@@ -270,10 +270,10 @@ function displayStudent(student) {
 
   // INQUSITOR
   if (student.inquisitor) {
-    clone.querySelector("[data-field=inquisitor]").textContent = "Yes";
+    clone.querySelector("[data-field=inquisitor]").textContent = "Inquisitor";
     document.querySelector("#inquisitorText").textContent = "Inquisitor: Yes";
   } else {
-    clone.querySelector("[data-field=inquisitor]").textContent = "No";
+    clone.querySelector("[data-field=inquisitor]").textContent = "Make inquisitor";
     document.querySelector("#inquisitorText").textContent = "Inquisitor: No";
   }
 
@@ -286,10 +286,11 @@ function displayStudent(student) {
   // PREFECT
   if (student.prefect) {
     document.querySelector("#prefectText").textContent = "Prefect: Yes";
-    clone.querySelector("[data-field=prefect]").textContent = "Yes";
+    clone.querySelector("[data-field=prefect]").textContent = "Prefect";
   } else {
     document.querySelector("#prefectText").textContent = "Prefect: No";
-    clone.querySelector("[data-field=prefect]").textContent = "No";
+    clone.querySelector("[data-field=prefect]").textContent = "Make prefect";
+    clone.querySelector("[data-field=prefect]").style.border = "1px solid black";
   }
 
   function makePrefect() {
