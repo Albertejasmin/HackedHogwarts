@@ -67,7 +67,6 @@ button {
   border: solid 3px;
 }
 
-tr,
 button:hover {
   cursor: pointer;
 }
@@ -350,4 +349,5 @@ td[data-field="expelled"]:hover,
 td[data-field="prefect"]:hover,
 td[data-field="inquisitor"]:hover {
   color: black;
+  cursor: pointer;
 }
