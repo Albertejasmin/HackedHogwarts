@@ -380,7 +380,8 @@ function displayStudent(student) {
     if (student.lastName === "Alberte") {
       alertFromHacker();
       document.querySelector("#hacking_msg h1").textContent = "Hacker cannot be removed!";
-    } else if (student.expelled === true) {
+    } else {
+      student.expelled = true;
       const studentID = allStudents.indexOf(student);
 
       const newExpelledStudent = allStudents.splice(studentID, 1);
