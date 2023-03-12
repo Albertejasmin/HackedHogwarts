@@ -377,18 +377,21 @@ function displayStudent(student) {
   }
 
   function expelStudent() {
-    student.expelled = true;
+    if (student.lastName === "Alberte") {
+      alertFromHacker();
+      document.querySelector("#hacking_msg h1").textContent = "Hacker cannot be removed!";
+    } else if (student.expelled === true) {
+      const studentID = allStudents.indexOf(student);
 
-    const studentID = allStudents.indexOf(student);
+      const newExpelledStudent = allStudents.splice(studentID, 1);
 
-    const newExpelledStudent = allStudents.splice(studentID, 1);
+      /* shift gør at den klikkede student bliver taget ud af det gamle array allStudents */
+      const moveExpelledStudent = newExpelledStudent.shift();
 
-    /* shift gør at den klikkede student bliver taget ud af det gamle array allStudents */
-    const moveExpelledStudent = newExpelledStudent.shift();
-
-    /* push gør at den klikkede student bliver fjernet fra listen ud i den nye liste allExpelledStudents*/
-    allExpelledStudents.push(moveExpelledStudent);
-    console.log(allExpelledStudents);
+      /* push gør at den klikkede student bliver fjernet fra listen ud i den nye liste allExpelledStudents*/
+      allExpelledStudents.push(moveExpelledStudent);
+      console.log(allExpelledStudents);
+    }
 
     buildList();
   }
