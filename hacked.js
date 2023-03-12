@@ -290,7 +290,6 @@ function displayStudent(student) {
   } else {
     document.querySelector("#prefectText").textContent = "Prefect: No";
     clone.querySelector("[data-field=prefect]").textContent = "Make prefect";
-    clone.querySelector("[data-field=prefect]").style.border = "1px solid black";
   }
 
   function makePrefect() {
@@ -389,6 +388,12 @@ function displayStudent(student) {
 
       /* shift gør at den klikkede student bliver taget ud af det gamle array allStudents */
       const moveExpelledStudent = newExpelledStudent.shift();
+
+      alertFromHacker();
+      document.querySelector("#hacking_msg").textContent = student.firstName + " was EXPELLED";
+      document.querySelector("#hacking_msg").style.color = "red";
+      document.querySelector("#hacking_msg").style.fontSize = "5rem";
+      document.querySelector("#hacking_msg").style.fontFamily = "Harry Potter";
 
       /* push gør at den klikkede student bliver fjernet fra listen ud i den nye liste allExpelledStudents*/
       allExpelledStudents.push(moveExpelledStudent);

@@ -7,6 +7,9 @@
   font-family: "Harry Potter";
   src: url("//db.onlinewebfonts.com/t/0421d4186d6efbfc5331fe180895e780.woff2") format("woff2");
 }
+html {
+  background-color: rgba(117, 97, 66, 0.7);
+}
 
 h1,
 h3 {
@@ -21,6 +24,10 @@ button {
 
 #search {
   text-align: center;
+  opacity: 90%;
+}
+#search p {
+  font-family: "Harry Potter";
 }
 
 #filter_buttons,
@@ -305,11 +312,42 @@ td {
 button {
   background-color: rgb(201, 201, 201);
 }
+#hacking_btn {
+  background-color: transparent;
+  color: whitesmoke;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.glow {
+  font-size: 80px;
+  color: #ffffffae;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00691a, 0 0 40px #9b0000, 0 0 50px #180083, 0 0 60px #c4c100, 0 0 70px #ceff2d;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #2d077d, 0 0 40px #14a11b, 0 0 50px #970000, 0 0 60px #237904, 0 0 70px #6a3eb5, 0 0 80px #be91a8;
+  }
+}
 
 td[data-field="expelled"] {
-  color: red;
-  border: solid 1px;
+  text-align: center;
 }
+td[data-field="expelled"],
+td[data-field="prefect"],
 td[data-field="inquisitor"] {
-  color: blue;
+  text-decoration: underline;
+  color: whitesmoke;
+}
+td[data-field="expelled"]:hover,
+td[data-field="prefect"]:hover,
+td[data-field="inquisitor"]:hover {
+  color: black;
 }
